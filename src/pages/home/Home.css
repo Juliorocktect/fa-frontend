@@ -1,0 +1,9 @@
+.video-container {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home {
+  width: 100%;
+}

@@ -1,0 +1,37 @@
+.video {
+  width: 80%;
+  padding: 5%;
+  background-color: #1f1d26;
+  border-radius: 15px;
+}
+.video-top-section {
+  width: 100%;
+}
+.preview-img {
+  width: 100%;
+  border-radius: 8px;
+}
+.video-profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+}
+.video-title {
+  color: aliceblue;
+  margin: 0;
+}
+.video-description {
+  color: rgb(183, 190, 195);
+  margin: 0;
+}
+.video-description-section {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2%;
+}
+.data-section {
+  margin: 0;
+  margin-left: 5%;
+}
