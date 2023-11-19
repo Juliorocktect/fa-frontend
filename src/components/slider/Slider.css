@@ -1,0 +1,25 @@
+.slider {
+  height: 20vh;
+  width: 100vw;
+  background-color: #1f1d26;
+  display: flex;
+  align-items: end;
+}
+.slider-container {
+  overflow: auto;
+  width: 100%;
+  height: 50%;
+  white-space: nowrap;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 5%;
+}
+.element {
+  width: 60px;
+  height: 60px;
+}
+.slider-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+}
