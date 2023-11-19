@@ -1,0 +1,15 @@
+.search-input {
+  color: #ffff;
+  background-color: #1f1d26;
+  outline: none;
+  border: none;
+  width: 80%;
+  height: 3rem;
+  border-radius: 12px;
+  font-size: larger;
+}
+.search-head {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
+}
