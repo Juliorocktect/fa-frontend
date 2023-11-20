@@ -7,6 +7,7 @@ import Search from "./search/Search";
 import Profile from "./profile/Profile";
 import Account from "./account/Account";
 import Player from "./player/Player";
+import Login from "./login/Login";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/account" element={<Account />}></Route>
         <Route path="/player" element={<Player />}></Route>
+        <Route path="/login" element={<Login />}></Route>
       </Routes>
     </>
   );
