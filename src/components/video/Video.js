@@ -1,6 +1,8 @@
 import React from "react";
 import "./Video.css";
+import { useNavigate } from "react-router-dom";
 function Video() {
+  const nav = useNavigate();
   return (
     <>
       <div className="video">
@@ -18,6 +20,9 @@ function Video() {
               src="https://wallpapers.com/images/featured-full/nature-2ygv7ssy2k0lxlzu.jpg"
               alt=""
               className="video-profile-pic"
+              onClick={() => {
+                nav("/profile/");
+              }}
             />
           </div>
           <div className="data-section">
