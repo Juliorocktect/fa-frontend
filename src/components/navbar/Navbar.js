@@ -27,7 +27,12 @@ function Navbar() {
             }}
           />
           <Alert12Regular className="nav-icon" />
-          <Person12Regular className="nav-icon" />
+          <Person12Regular
+            className="nav-icon"
+            onClick={() => {
+              navigate("/login");
+            }}
+          />
         </div>
       </div>
     </>

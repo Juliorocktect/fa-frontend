@@ -1,5 +1,7 @@
 .video {
   width: 80%;
+  max-width: 300px;
+  min-width: 250px;
   padding: 5%;
   background-color: #1f1d26;
   border-radius: 15px;
@@ -35,4 +37,10 @@
 .data-section {
   margin: 0;
   margin-left: 5%;
+}
+@media (min-width: 700px) {
+  .video {
+    padding: 2%;
+    margin-top: 2%;
+  }
 }

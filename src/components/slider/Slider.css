@@ -19,6 +19,7 @@
   padding-bottom: 5%;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  align-content: center;
 }
 .slider-container::-webkit-scrollbar {
   display: none;
@@ -31,4 +32,10 @@
   width: 100%;
   height: 100%;
   border-radius: 100px;
+}
+@media (min-width: 700px) {
+  .slider {
+    align-content: center;
+    background-color: #111016;
+  }
 }

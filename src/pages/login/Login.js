@@ -1,10 +1,12 @@
 import React from "react";
 import "./Login.css";
+import w from "./w.svg";
 
 function Login() {
   return (
     <>
       <div className="login-page">
+        <img alt="" className="logo" src={w}></img>
         <div className="login-block">
           <h1 className="login-title">Anmelden</h1>
           <div className="auth-form-body">

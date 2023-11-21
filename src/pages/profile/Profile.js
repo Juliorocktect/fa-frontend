@@ -10,6 +10,7 @@ function Profile() {
   function subscribe() {
     console.log("sub");
   }
+
   return (
     <>
       <div className="profile">
@@ -21,7 +22,12 @@ function Profile() {
                 navigate("/");
               }}
             />
-            <AddCircle12Regular className="nav-icon" onClick={subscribe()} />
+            <AddCircle12Regular
+              className="nav-icon"
+              onClick={() => {
+                subscribe();
+              }}
+            />
           </div>
           <div className="profile-name">
             <div className="profile-title-img">

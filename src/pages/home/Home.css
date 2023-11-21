@@ -9,3 +9,17 @@
 .home {
   width: 100%;
 }
+@media (min-width: 700px) {
+  .video-container-container {
+    display: flex;
+    justify-content: center;
+  }
+  .video-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 0.5fr));
+    gap: 2rem 1rem;
+  }
+}

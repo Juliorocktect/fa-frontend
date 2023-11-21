@@ -1,0 +1,61 @@
+.desk-nav {
+  box-shadow: 0px 2px 2px #0000006f;
+  width: 96%;
+  background-color: #1f1d26;
+  margin: 2%;
+  height: 10vh;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.nav-logo {
+  width: 15%;
+  margin-left: 2%;
+  justify-self: flex-start;
+}
+.search-bar-nav-desk {
+  color: #ffff;
+  background-color: #1f1d26;
+  outline: none;
+  border: none;
+  width: 80%;
+  height: 3rem;
+  font-size: larger;
+  margin-left: 2%;
+}
+.search-icon-container {
+  margin-left: 2%;
+}
+.search-container-nav {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #707070;
+  border-radius: 12px;
+  background-color: #1f1d26;
+  width: 40%;
+  align-items: center;
+}
+@media (max-width: 700px) {
+  .desk-nav {
+    display: none;
+  }
+}
+.icons-container-nav {
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
+}
+.bell-container {
+  background-color: #17171c;
+  box-shadow: 0px 2px 2px #0000006f;
+  border-radius: 12px;
+  padding: 2%;
+}
+.account-container {
+  background-color: #17171c;
+  box-shadow: 0px 2px 2px #0000006f;
+  border-radius: 12px;
+  padding: 2%;
+}
