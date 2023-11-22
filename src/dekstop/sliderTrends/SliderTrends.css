@@ -12,7 +12,7 @@
   font-weight: bold;
 }
 .disabled {
-  display: none;
+  opacity: 0;
 }
 .slider-trend {
   display: flex;
