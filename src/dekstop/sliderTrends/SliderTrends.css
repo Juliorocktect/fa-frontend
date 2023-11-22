@@ -1,15 +1,3 @@
-.img-slider-container {
-  width: 80%;
-  height: 50vh;
-}
-.image-slider {
-  position: absolute;
-  width: 80%;
-  height: 50vh;
-  border-radius: 25px;
-  transition: all 0.3s ease-in-out;
-  z-index: 0;
-}
 .slider-button {
   z-index: 1;
   outline: none;
@@ -29,30 +17,26 @@
 .slider-trend {
   display: flex;
   align-content: center;
-  justify-content: space-around;
-  align-items: center;
   margin-top: 5%;
+  height: 40vh;
+  width: 100%;
+}
+.image-slider {
+  width: 90%;
+  height: 100%;
   overflow: hidden;
+  border-radius: 22px;
+}
+.left {
+  margin-left: -80%;
+}
+.right {
+  margin-right: -80%;
 }
 .slider-button:hover {
   transform: scale(1.4);
 }
-.left {
-  position: absolute;
-  width: 80%;
-  height: 50vh;
-  margin-left: -85%;
-  z-index: -2;
-}
-.right {
-  position: absolute;
-  width: 80%;
-  height: 50vh;
-  margin-left: 85%;
-  z-index: -1;
-  overflow: hidden;
-}
-@mdeia (max-width: 700px) {
+@media (max-width: 700px) {
   .slider-trend {
     display: none;
   }

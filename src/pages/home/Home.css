@@ -8,6 +8,8 @@
 }
 .home {
   width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
 }
 @media (min-width: 700px) {
   .video-container-container {
