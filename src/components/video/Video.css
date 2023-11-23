@@ -1,7 +1,5 @@
 .video {
-  width: 80%;
-  max-width: 300px;
-  min-width: 250px;
+  max-width: 600px;
   padding: 5%;
   background-color: #1f1d26;
   border-radius: 15px;
@@ -40,7 +38,12 @@
 }
 @media (min-width: 700px) {
   .video {
-    padding: 2%;
-    margin-top: 2%;
+    padding: 5%;
+    max-width: 400px;
+    min-width: 200px;
+  }
+  .video-profile-pic {
+    width: 50px;
+    height: 50px;
   }
 }
