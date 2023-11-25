@@ -11,6 +11,7 @@
 .preview-img {
   width: 100%;
   border-radius: 8px;
+  max-height: 20vh;
 }
 .video-profile-pic {
   width: 50px;
