@@ -8,6 +8,7 @@ import Profile from "./profile/Profile";
 import Account from "./account/Account";
 import Player from "./player/Player";
 import Login from "./login/Login";
+import VideoPlayer from "../components/videoPlayer/VideoPlayer";
 
 function App() {
   return (

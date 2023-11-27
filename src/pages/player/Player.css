@@ -1,0 +1,37 @@
+.controls-container {
+  position: absolute;
+  display: flex;
+  top: 40%;
+  width: 50%;
+  justify-content: space-around;
+}
+.player-config {
+  position: absolute;
+}
+#video-player {
+  z-index: -2;
+}
+.video-player {
+  display: flex;
+  justify-content: center;
+  height: 30vh;
+  width: 100%;
+  position: relative;
+}
+.video-player:hover {
+  background-color: rgba(0, 0, 0, 0.254);
+}
+.player-config {
+  display: flex;
+  width: 90%;
+  margin-right: 5%;
+  justify-content: flex-end;
+  bottom: 0;
+  right: 0;
+}
+.player-icon {
+  margin-right: 2%;
+}
+.play-icon-disabled {
+  display: none;
+}

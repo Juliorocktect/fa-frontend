@@ -1,7 +1,7 @@
 import React from "react";
 import "./Video.css";
 import { useNavigate } from "react-router-dom";
-function Video({ preview, profile }) {
+function Video({ preview, profile, title, description,videoId }) {
   const nav = useNavigate();
   return (
     <>
@@ -21,10 +21,8 @@ function Video({ preview, profile }) {
             />
           </div>
           <div className="data-section">
-            <h3 className="video-title">GPT has been unleashed</h3>
-            <h6 className="video-description">
-              Fireship · 661.557 Aufrufe · vor 4 Tagen
-            </h6>
+            <h3 className="video-title">{title}</h3>
+            <h6 className="video-description">{description}</h6>
           </div>
         </div>
       </div>
