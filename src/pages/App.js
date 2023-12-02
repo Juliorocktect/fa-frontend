@@ -21,6 +21,7 @@ function App() {
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/account" element={<Account />}></Route>
         <Route path="/player" element={<Player />}></Route>
+        <Route path="/player/:query" element={<Player />}></Route>
         <Route path="/login" element={<Login />}></Route>
       </Routes>
     </>

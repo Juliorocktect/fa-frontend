@@ -1,9 +1,14 @@
 .video {
   max-width: 600px;
+  width: auto;
   padding: 5%;
-  background-color: #1f1d26;
+  background-color: hsl(253, 13%, 13%);
   border-radius: 15px;
   margin-top: 5%;
+}
+a {
+  text-decoration: none;
+  color: #00000000;
 }
 .video-top-section {
   width: 100%;
@@ -11,6 +16,7 @@
 .preview-img {
   width: 100%;
   border-radius: 8px;
+  aspect-ratio: 5/3;
 }
 .video-profile-pic {
   width: 50px;
@@ -48,6 +54,7 @@
   }
   .preview-img {
     max-height: 20vh;
+    aspect-ratio: 5/3;
   }
 }
 #video {
@@ -56,6 +63,7 @@
   background-color: #1f1d26;
   border-radius: 15px;
   margin-top: 5%;
+  aspect-ratio: 5/2;
 }
 #video-top-section {
   width: 100%;
@@ -63,11 +71,13 @@
 #preview-img {
   width: 100%;
   border-radius: 8px;
+  aspect-ratio: 5/3;
 }
 #video-profile-pic {
   width: 50px;
   height: 50px;
   border-radius: 8px;
+  aspect-ratio: 1/1;
 }
 #video-title {
   color: aliceblue;
@@ -100,5 +110,6 @@
   }
   #preview-img {
     max-height: 20vh;
+    aspect-ratio: 3/2;
   }
 }

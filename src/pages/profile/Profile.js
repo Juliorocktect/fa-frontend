@@ -1,15 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Profile.css";
-import { ArrowLeft12Filled, AddCircle12Regular } from "@fluentui/react-icons";
+import {
+  ArrowLeft12Filled,
+  AddCircle12Regular,
+  CheckmarkCircle16Filled,
+} from "@fluentui/react-icons";
 import Video from "../../components/video/Video";
 import Navbar from "../../components/navbar/Navbar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
+import { useEffect } from "react";
 function Profile() {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [isDataAvailable, setDataAvailable] = useState(false);
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch(
+      "http://localhost:9090/user/getUser?userId=" + searchParams.get("id"),
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setUser(result);
+        console.log(user);
+        setDataAvailable(true);
+      })
+      .catch((error) => console.log("error", error));
+    renderBanner(user.bannerUrl);
+  }, [isDataAvailable]);
+
+  function renderBanner(bannerUrl) {
+    document
+      .getElementById("profile-pic-id-desk")
+      .setAttribute("src", bannerUrl);
+    document.getElementById("profile-pic-id").setAttribute("src", bannerUrl);
+  }
 
   function subscribe() {
     console.log("sub");
+    console.log(searchParams.get("id"));
+    document.getElementById("subscribe-button").classList.add("to-check");
+    document.getElementById("subscribe-button").classList.add("sub-disabled");
   }
 
   return (
@@ -33,11 +70,7 @@ function Profile() {
           </div>
           <div className="profile-name">
             <div className="profile-title-img">
-              <img
-                src="https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp"
-                alt=""
-                className="profile-pic"
-              />
+              <img src="" alt="" id="profile-pic-id" />
             </div>
             <div className="profile-title">
               <h3 className="profile-title-h3">Julio</h3>
@@ -56,9 +89,10 @@ function Profile() {
           <div className="profile-name">
             <div className="profile-title-img">
               <img
-                src="https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp"
+                src=""
                 alt=""
                 className="profile-pic"
+                id="profile-pic-id-desk"
               />
             </div>
             <div className="profile-title">
@@ -68,62 +102,15 @@ function Profile() {
           </div>
           <AddCircle12Regular
             className="nav-icon"
+            id="subscribe-button"
             onClick={() => {
               subscribe();
             }}
           />
+          <CheckmarkCircle16Filled className="subscribed" />
         </div>
         <div className="video-container-profile">
-          <div className="profile-video-section">
-            <Video
-              preview={
-                "http://localhost/4ffeeb10-f0d5-41f2-b18a-7cc6142ee61e/federico-bottos-JUFuI-kBtas-unsplash.jpg"
-              }
-              profile={
-                "http://localhost/d0bd40ff-ff8c-473a-ba2e-76372c4f7a55/Screensaver.png"
-              }
-            ></Video>
-            <Video
-              preview={
-                "http://localhost/4ffeeb10-f0d5-41f2-b18a-7cc6142ee61e/federico-bottos-JUFuI-kBtas-unsplash.jpg"
-              }
-              profile={
-                "http://localhost/4ffeeb10-f0d5-41f2-b18a-7cc6142ee61e/federico-bottos-JUFuI-kBtas-unsplash.jpg"
-              }
-            ></Video>
-            <Video
-              preview={
-                "http://localhost/d0bd40ff-ff8c-473a-ba2e-76372c4f7a55/Screensaver.png"
-              }
-              profile={
-                "http://localhost/4ffeeb10-f0d5-41f2-b18a-7cc6142ee61e/federico-bottos-JUFuI-kBtas-unsplash.jpg"
-              }
-            ></Video>
-            <Video
-              preview={
-                "http://localhost/d0bd40ff-ff8c-473a-ba2e-76372c4f7a55/Screensaver.png"
-              }
-              profile={
-                "http://localhost/4ffeeb10-f0d5-41f2-b18a-7cc6142ee61e/federico-bottos-JUFuI-kBtas-unsplash.jpg"
-              }
-            ></Video>
-            <Video
-              preview={
-                "http://localhost/4ffeeb10-f0d5-41f2-b18a-7cc6142ee61e/federico-bottos-JUFuI-kBtas-unsplash.jpg"
-              }
-              profile={
-                "http://localhost/4ffeeb10-f0d5-41f2-b18a-7cc6142ee61e/federico-bottos-JUFuI-kBtas-unsplash.jpg"
-              }
-            ></Video>
-            <Video
-              preview={
-                "http://localhost/4ffeeb10-f0d5-41f2-b18a-7cc6142ee61e/federico-bottos-JUFuI-kBtas-unsplash.jpg"
-              }
-              profile={
-                "http://localhost/d0bd40ff-ff8c-473a-ba2e-76372c4f7a55/Screensaver.png"
-              }
-            ></Video>
-          </div>
+          <div className="profile-video-section"></div>
         </div>
       </div>
       <Navbar></Navbar>

@@ -1,4 +1,4 @@
-.profile-pic {
+#profile-pic {
   width: 60px;
   height: 60px;
   border-radius: 100px;
@@ -35,6 +35,11 @@
 .profile {
   width: 100%;
 }
+#profile-pic-id {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+}
 .profile-banner-img {
   width: 100%;
   max-height: 30vh;
@@ -47,7 +52,24 @@
 .desk-bottom-section {
   display: none;
 }
+#profile-pic-id-desk {
+  display: none;
+}
+.sub-disabled {
+  display: none;
+}
+.to-check {
+  color: #bb7171;
+  -webkit-transform: rotate(360grad);
+  transition: 400ms;
+}
 @media (min-width: 700px) {
+  #profile-pic-id-desk {
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+  }
   .profile-banner {
     width: 100%;
     max-height: 50vh;
