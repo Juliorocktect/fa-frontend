@@ -4,14 +4,13 @@ import "./Home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Slider from "../../components/slider/Slider";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
-import SliderTrends from "../../dekstop/sliderTrends/SliderTrends";
+import Trends from "../../components/trends/Trends";
 import "../../components/video/Video.css";
 import { useState } from "react";
 
 function Home() {
   const [videos, setVideos] = useState([]);
   const [isDataAvailable, setDataAvailable] = useState(false);
-
   useEffect(() => {
     var requestOptions = {
       method: "GET",
@@ -71,7 +70,7 @@ function Home() {
     <>
       <div className="home">
         <NavbarDesk></NavbarDesk>
-        <SliderTrends />
+        <Trends />
         <Slider></Slider>
         <div className="video-container-container">
           <div className="video-container" id="videoContainer"></div>

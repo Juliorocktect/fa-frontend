@@ -43,9 +43,16 @@ function SliderTrends() {
     } else {
       enable("right");
     }
-    setLeft(imagesLinks[left]);
-    setRight(imagesLinks[right]);
-    setCenter(imagesLinks[center]);
+    var newNode = document.createElement("img");
+    newNode.setAttribute("src", imagesLinks[right]);
+    newNode.classList.add("right");
+    newNode.setAttribute("id", "right");
+    var parent = document.getElementById("slider-trends");
+    parent.appendChild(newNode);
+    document.getElementById("center").setAttribute("id", "left");
+    document.getElementById("center").classList.add("left");
+    var left = document.getElementById("left");
+    parent.removeChild(left);
     console.log("left: " + left);
     console.log("center: " + center);
     console.log("right: ", right);
@@ -88,7 +95,7 @@ function SliderTrends() {
   }
   return (
     <>
-      <div className="slider-trend">
+      <div className="slider-trend" id="slider-trends">
         <img
           className="image-slider left"
           id="left"
