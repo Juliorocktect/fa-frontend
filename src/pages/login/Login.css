@@ -39,10 +39,11 @@ label {
   background-color: #1f1d26;
   outline: none;
   border: 1px solid #707070;
-  width: 80%;
   height: 3rem;
   border-radius: 12px;
   font-size: larger;
+  max-width: 400px;
+  width: 80%;
 }
 @font-face {
   font-family: Designer;

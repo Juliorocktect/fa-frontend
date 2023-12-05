@@ -10,6 +10,7 @@ import Player from "./player/Player";
 import Login from "./login/Login";
 import VideoPlayer from "../components/videoPlayer/VideoPlayer";
 import Trends from "../components/trends/Trends";
+import Signup from "./signup/Signup";
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/player/:query" element={<Player />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/slider" element={<Trends />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
       </Routes>
     </>
   );

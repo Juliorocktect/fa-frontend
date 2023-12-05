@@ -19,7 +19,9 @@ function NavbarDesk() {
             src={logo}
             alt=""
             className="nav-logo-svg"
-            onClick={navigate("/")}
+            onClick={() => {
+              navigate("/");
+            }}
           />
         </div>
         <div className="search-container-nav">

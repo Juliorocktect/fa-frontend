@@ -1,0 +1,139 @@
+.signup-form {
+  width: 100%;
+  max-width: 400px;
+  background-color: #1f1d26;
+  border-radius: 12px;
+  border: 1px solid #707070;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signup-page {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
+  margin-top: 2%;
+}
+#signup-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+}
+.profile-pic-upload-section {
+  display: none;
+}
+.signup-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+}
+#remove-btn {
+  outline: none;
+  border: 1px solid #707070;
+  color: #ff3366;
+  background-color: #00000000;
+  font-size: larger;
+  border-radius: 12px;
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 20%;
+  margin-left: 5%;
+  cursor: pointer;
+}
+@media (min-width: 700px) {
+  #uploaded {
+    margin-top: 5%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .signup-upper-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5%;
+  }
+  .signup-form {
+    width: 80%;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .profile-pic-upload {
+    width: 100%;
+    outline: none;
+    border: none;
+    opacity: 0;
+    height: 20vh;
+  }
+  p {
+    margin: 0;
+  }
+  .login-title {
+    margin-top: 5%;
+    margin-bottom: 2%;
+  }
+  .profile-pic-upload-section {
+    display: block;
+    border-radius: 10px;
+    border: 3px #707070;
+    position: relative;
+    border-style: dotted;
+  }
+  .signup-form-form {
+    width: 80%;
+  }
+  .upload-text {
+    margin-left: auto;
+    margin-right: auto;
+    color: aliceblue;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-50%, -50%);
+    z-index: inherit;
+  }
+  .submit-container {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .sign-up-button {
+    border-radius: 12px;
+    border: none;
+    background-color: #bb7171;
+    color: #fff;
+    padding: 5%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: larger;
+    cursor: pointer;
+  }
+  .sign-up-button-cancel {
+    border: 1px solid #707070;
+    color: aliceblue;
+    border-radius: 12px;
+    background-color: #1f1d26;
+    padding: 5%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: larger;
+    cursor: pointer;
+  }
+  .sign-up-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

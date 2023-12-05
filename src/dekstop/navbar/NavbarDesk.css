@@ -14,6 +14,7 @@
   width: 15%;
   margin-top: 1%;
   justify-self: flex-start;
+  cursor: pointer;
 }
 .search-bar-nav-desk {
   color: #ffff;

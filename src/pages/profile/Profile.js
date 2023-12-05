@@ -10,11 +10,13 @@ import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { useEffect } from "react";
+import { getElementError } from "@testing-library/react";
 function Profile() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [isDataAvailable, setDataAvailable] = useState(false);
   const [user, setUser] = useState("");
+  var subscribed = false;
 
   useEffect(() => {
     var requestOptions = {
@@ -28,11 +30,12 @@ function Profile() {
       .then((response) => response.json())
       .then((result) => {
         setUser(result);
-        console.log(user);
         setDataAvailable(true);
       })
       .catch((error) => console.log("error", error));
     renderBanner(user.bannerUrl);
+    if (!subscribed) {
+    }
   }, [isDataAvailable]);
 
   function renderBanner(bannerUrl) {
@@ -43,10 +46,28 @@ function Profile() {
   }
 
   function subscribe() {
-    console.log("sub");
-    console.log(searchParams.get("id"));
-    document.getElementById("subscribe-button").classList.add("to-check");
-    document.getElementById("subscribe-button").classList.add("sub-disabled");
+    //TODO: fix for mobile devices
+    if (window.innerWidth >= 700) {
+      document.getElementById("subscribe-button").classList.add("to-check");
+      setTimeout(() => {
+        var add = document.getElementById("subscribe-button");
+        document.getElementById("profile-bottom").removeChild(add);
+        document.getElementById(
+          "profile-bottom"
+        ).innerHTML += `<svg class="subscribed ___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0" id="subed" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 2a6 6 0 1 1 0 12A6 6 0 0 1 8 2Zm2.12 4.16L7.25 9.04l-1.4-1.4a.5.5 0 1 0-.7.71L6.9 10.1c.2.2.5.2.7 0l3.23-3.23a.5.5 0 0 0-.71-.7Z" fill="currentColor"></path></svg>`;
+      }, 290);
+    } else {
+      document
+        .getElementById("subscribe-button-mobile")
+        .classList.add("to-check");
+      setTimeout(() => {
+        var add = document.getElementById("subscribe-button-mobile");
+        document.getElementById("profile-icon-section").removeChild(add);
+        document.getElementById(
+          "profile-icon-section"
+        ).innerHTML += `<svg class="subscribed ___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0" id="subed" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 2a6 6 0 1 1 0 12A6 6 0 0 1 8 2Zm2.12 4.16L7.25 9.04l-1.4-1.4a.5.5 0 1 0-.7.71L6.9 10.1c.2.2.5.2.7 0l3.23-3.23a.5.5 0 0 0-.71-.7Z" fill="currentColor"></path></svg>`;
+      }, 290);
+    }
   }
 
   return (
@@ -54,7 +75,7 @@ function Profile() {
       <NavbarDesk></NavbarDesk>
       <div className="profile">
         <div className="profile-head-section">
-          <div className="profile-icon-section">
+          <div className="profile-icon-section" id="profile-icon-section">
             <ArrowLeft12Filled
               className="nav-icon"
               onClick={() => {
@@ -66,6 +87,7 @@ function Profile() {
               onClick={() => {
                 subscribe();
               }}
+              id="subscribe-button-mobile"
             />
           </div>
           <div className="profile-name">
@@ -85,7 +107,7 @@ function Profile() {
             className="profile-banner-img"
           />
         </div>
-        <div className="desk-bottom-section">
+        <div className="desk-bottom-section" id="profile-bottom">
           <div className="profile-name">
             <div className="profile-title-img">
               <img
@@ -107,7 +129,6 @@ function Profile() {
               subscribe();
             }}
           />
-          <CheckmarkCircle16Filled className="subscribed" />
         </div>
         <div className="video-container-profile">
           <div className="profile-video-section"></div>
