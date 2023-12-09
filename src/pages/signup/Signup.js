@@ -4,17 +4,17 @@ import logo from "..//../icons/w.svg";
 import { ArrowUpload16Filled, Delete16Regular } from "@fluentui/react-icons";
 
 function Signup() {
-  const [image, setImage] = useState("");
-  const [banner, setBanner] = useState("");
+  const [picture, setPicture] = useState(null);
+  const [banner, setBanner] = useState(null);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      setPicture(event.target.files[0]);
     }
   };
   const onBannerChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setBanner(URL.createObjectURL(event.target.files[0]));
+      setBanner(event.target.files[0]);
       checkFile();
     }
   };
@@ -28,7 +28,7 @@ function Signup() {
       document.getElementById("login-title").remove();
       let replace = `  <div className="uploaded" id="uploaded">
       <img
-        src=${banner}
+        src=${URL.createObjectURL(banner)}
         alt=""
         className="signup-img"
         id="signup-img"
