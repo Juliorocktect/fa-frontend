@@ -4,9 +4,53 @@
   background-color: #1f1d26;
   border-radius: 12px;
   border: 1px solid #707070;
-  display: flex;
   justify-content: center;
   align-items: center;
+}
+.sign-up-button {
+  border-radius: 12px;
+  border: none;
+  background-color: #bb7171;
+  color: #fff;
+  padding: 5%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  font-size: larger;
+  cursor: pointer;
+}
+.profile-pic-upload {
+  width: 60%;
+  height: 10vh;
+  color: aliceblue;
+}
+.login-title {
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+.upload-text {
+  display: none;
+}
+.sign-up-button-cancel {
+  border: 1px solid #707070;
+  color: aliceblue;
+  border-radius: 12px;
+  background-color: #1f1d26;
+  padding: 5%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  font-size: larger;
+  cursor: pointer;
+}
+.sign-up-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.submit-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50%;
 }
 .signup-page {
   display: flex;
@@ -16,14 +60,12 @@
   align-items: center;
   max-width: 1000px;
   margin-top: 2%;
+  margin-bottom: 5%;
 }
 #signup-img {
   width: 64px;
   height: 64px;
   border-radius: 100%;
-}
-.profile-pic-upload-section {
-  display: none;
 }
 .signup-img {
   width: 64px;
@@ -46,12 +88,58 @@
   margin-left: 5%;
   cursor: pointer;
 }
+.signup-input {
+  padding-left: 5%;
+  color: #ffff;
+  background-color: #1f1d26;
+  outline: none;
+  border: 1px solid #707070;
+  height: 3rem;
+  border-radius: 12px;
+  font-size: larger;
+  max-width: 1000px;
+  width: 100%;
+}
+.signup-container {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.signup-upper-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.signup-username-form {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.signup-password-form {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.signup-form {
+  width: 80%;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 @media (min-width: 700px) {
   #uploaded {
     margin-top: 5%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+  }
+  .signup-password-form {
+    margin-top: 0;
+  }
+  .signup-username-form {
+    margin-top: 0;
   }
   .signup-upper-section {
     display: flex;
@@ -77,9 +165,8 @@
   p {
     margin: 0;
   }
-  .login-title {
-    margin-top: 5%;
-    margin-bottom: 2%;
+  .signup-input {
+    width: 80%;
   }
   .profile-pic-upload-section {
     display: block;
@@ -88,6 +175,7 @@
     position: relative;
     border-style: dotted;
   }
+
   .signup-form-form {
     width: 80%;
   }

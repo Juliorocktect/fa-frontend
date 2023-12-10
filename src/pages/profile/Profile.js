@@ -24,7 +24,8 @@ function Profile() {
       redirect: "follow",
     };
     fetch(
-      "http://localhost:9090/user/getUser?userId=" + searchParams.get("id"),
+      "http://192.168.178.95:9090/user/getUser?userId=" +
+        searchParams.get("id"),
       requestOptions
     )
       .then((response) => response.json())

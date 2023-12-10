@@ -16,7 +16,10 @@ function Home() {
       method: "GET",
       redirect: "follow",
     };
-    fetch("http://JulioPC:9090/video/getVideosByLimit?limit=8", requestOptions)
+    fetch(
+      "http://192.168.178.95:9090/video/getVideosByLimit?limit=4",
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         setVideos(result);
