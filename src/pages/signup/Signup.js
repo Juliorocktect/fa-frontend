@@ -4,31 +4,57 @@ import logo from "..//../icons/w.svg";
 import { ArrowUpload16Filled, Delete16Regular } from "@fluentui/react-icons";
 
 function Signup() {
-  const [picture, setPicture] = useState(null);
-  const [banner, setBanner] = useState(null);
+  const [picture, setPicture] = useState(Object);
+  const [banner, setBanner] = useState(Object);
+  var profileUploaded = "";
 
-  const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setPicture(event.target.files[0]);
+  function removePicture(which) {
+    if (which == 1) {
+      console.log("called");
+      setPicture(new Object());
+      document.getElementById("profile-upload").innerHTML = "";
+      document.getElementById("profile-upload").innerHTML = profileUploaded;
+    } else {
+      setPicture(new Object());
+      document.getElementById("banner-upload").innerHTML = "";
+      document.getElementById("banner-upload").innerHTML = profileUploaded;
     }
-  };
-  const onBannerChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setBanner(event.target.files[0]);
-      checkFile();
+  }
+  function renderPicture(pictureURL) {
+    if (picture != 0) {
+      profileUploaded = document.getElementById("profile-upload").innerHTML;
+      document.getElementById("profile-form").remove();
+      document.getElementById("profile-heading").remove();
+      let replaceStr = `<div className="uploaded" id="uploaded">
+      <img
+        src=""
+        alt=""
+        className="signup-img"
+        id="signup-img-profile"
+      />
+      <button className="remove-btn" id="remove-btn">
+        <Delete16Regular />
+        Remove
+      </button>
+    </div>`;
+      document.getElementById("profile-upload").innerHTML += replaceStr;
+      document
+        .getElementById("signup-img-profile")
+        .setAttribute("src", pictureURL);
     }
-  };
-  function checkFile() {
-    if (document.getElementById("profile-pic-upload").files.length != 0) {
-      console.log("file uploaded");
-    }
-    if (document.getElementById("profile-banner-upload").files.length != 0) {
-      console.log("Banner uploaded");
+    document.getElementById("remove-btn").onclick = (e) => {
+      e.preventDefault();
+      removePicture(1);
+    };
+  }
+
+  function renderBanner(bannerURL) {
+    if (banner != 0) {
       document.getElementById("banner-form").remove();
       document.getElementById("login-title").remove();
       let replace = `  <div className="uploaded" id="uploaded">
       <img
-        src=${URL.createObjectURL(banner)}
+        src=""
         alt=""
         className="signup-img"
         id="signup-img"
@@ -40,6 +66,11 @@ function Signup() {
     </div>`;
       var parent = (document.getElementById("profile-upload").innerHTML +=
         replace);
+      document.getElementById("signup-img").setAttribute("src", bannerURL);
+      document.getElementById("remove-btn").onclick = (e) => {
+        e.preventDefault();
+        removePicture(2);
+      };
     }
   }
   return (
@@ -61,14 +92,24 @@ function Signup() {
                 </div>
               </div>
               <div id="profile-upload">
-                <h2 className="login-title">Profile Picture</h2>
-                <div className="profile-pic-upload-section">
+                <h2 className="login-title" id="profile-heading">
+                  Profile Picture
+                </h2>
+                <div className="profile-pic-upload-section" id="profile-form">
                   <input
                     type="file"
                     id="profile-pic-upload"
                     accept="image/*"
                     name="profile-pic"
-                    onChange={onImageChange}
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files.length > 0) {
+                        e.preventDefault();
+                        setPicture(e.target.files);
+                        var image = [];
+                        image.push(e.target.files[0]);
+                        renderPicture(URL.createObjectURL(new Blob(image)));
+                      }
+                    }}
                     className="profile-pic-upload"
                   />
                   <div className="upload-text">
@@ -78,24 +119,32 @@ function Signup() {
                   </div>
                 </div>
               </div>
-              <h2 className="login-title" id="login-title">
-                Profile Banner
-              </h2>
-              <div className="profile-pic-upload-section" id="banner-form">
-                <input
-                  type="file"
-                  id="profile-banner-upload"
-                  accept="image/*"
-                  name="banner"
-                  className="profile-pic-upload"
-                  onChange={(e) => {
-                    
-                  }}
-                />
-                <div className="upload-text">
-                  <ArrowUpload16Filled className="nav-icon upload-icon" />
-                  <h4>Upload a file or drag and drop</h4>
-                  <p>PNG,JPEG up to 10MB</p>
+              <div id="banner-upload">
+                <h2 className="login-title" id="login-title">
+                  Profile Banner
+                </h2>
+                <div className="profile-pic-upload-section" id="banner-form">
+                  <input
+                    type="file"
+                    id="profile-banner-upload"
+                    accept="image/*"
+                    name="banner"
+                    className="profile-pic-upload"
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files.length > 0) {
+                        e.preventDefault();
+                        setBanner(e.target.files);
+                        var image = [];
+                        image.push(e.target.files[0]);
+                        renderBanner(URL.createObjectURL(new Blob(image)));
+                      }
+                    }}
+                  />
+                  <div className="upload-text">
+                    <ArrowUpload16Filled className="nav-icon upload-icon" />
+                    <h4>Upload a file or drag and drop</h4>
+                    <p>PNG,JPEG up to 10MB</p>
+                  </div>
                 </div>
               </div>
               <div className="sign-up-bottom">
