@@ -6,7 +6,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { useEffect } from "react";
-import { getElementError } from "@testing-library/react";
+import { render } from "react-dom";
 function Profile() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -128,12 +128,24 @@ function Profile() {
           />
         </div>
         <div className="video-container-profile">
-          <div className="profile-video-section"></div>
+          <div className="profile-video-section" id="profile-video-section">
+            {
+              <Video
+                preview={
+                  "https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp"
+                }
+                profile={
+                  "https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp"
+                }
+                title={"Test"}
+                description={"IOUA INUHOAIP"}
+              />
+            }
+          </div>
         </div>
       </div>
       <Navbar></Navbar>
     </>
   );
 }
-
 export default Profile;

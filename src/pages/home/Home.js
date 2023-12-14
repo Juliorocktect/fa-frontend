@@ -24,48 +24,14 @@ function Home() {
       .then((result) => {
         setVideos(result);
         setDataAvailable(true);
+        console.log(videos);
       })
       .catch((error) => console.log("error", error));
     if (isDataAvailable) {
-      setVideoContent();
     }
   }, [isDataAvailable]);
-
-  function setVideoContent() {
-    let videoString = "";
-    for (let i = 0; i < videos.length; i++) {
-      videoString += `
-      <div className="video" id="video">
-      <a href="/player/${videos[i].id}">
-      <div className="video-top-section" id="video-top-section">
-        <img
-          src=${videos[i].thumbnailUrl}
-          alt="preview"
-          className="preview-img"
-          id="preview-img"
-        />
-      </div>
-      </a>
-      <div className="video-description-section" id="video-description-section">
-      <a href="/profile?id=${videos[i].authorId}">
-        <div className="profile-section" id="profile-section">
-          <img
-            src=${videos[i].profilePicture}
-            className="video-profile-pic"
-            id="video-profile-pic"
-          />
-        </div>
-        </a>
-        <div className="data-section" id="data-section">
-          <h3 className="video-title" id="video-title" >${videos[i].title}</h3>
-          <h6 className="video-description" id="video-description">${videos[i].description}</h6>
-        </div>
-      </div>
-    </div>
-      `;
-    }
-    document.getElementById("videoContainer").innerHTML += videoString;
-  }
+  //TODO: only load shown content + extra
+  //TODO: load new Content if old content isnt shown
   return (
     <>
       <div className="home">
@@ -73,7 +39,16 @@ function Home() {
         <Trends />
         <Slider></Slider>
         <div className="video-container-container">
-          <div className="video-container" id="videoContainer"></div>
+          <div className="video-container" id="videoContainer">
+            {videos.map((video) => (
+              <Video
+                preview={video.thumbnailUrl}
+                profile={video.profilePicture}
+                title={video.title}
+                description={video.description}
+              />
+            ))}
+          </div>
         </div>
         <div className="navbar-home">
           <Navbar className="home-nav"></Navbar>
