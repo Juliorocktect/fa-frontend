@@ -1,9 +1,15 @@
 .controls-container {
+  transition: ease-out 2000ms;
   position: absolute;
   display: flex;
   top: 40%;
   width: 50%;
   justify-content: space-around;
+  opacity: 0;
+}
+.player {
+  max-height: 80vh;
+  aspect-ratio: 16/9;
 }
 .player-config {
   position: absolute;
@@ -14,12 +20,14 @@
 .video-player {
   display: flex;
   justify-content: center;
-  height: 30vh;
-  width: 100%;
+  min-width: 50%;
+  aspect-ratio: 16/9;
   position: relative;
+  transition: ease-out 2000ms;
 }
 .video-player:hover {
   background-color: rgba(0, 0, 0, 0.254);
+  transition: none;
 }
 .player-config {
   display: flex;
@@ -34,4 +42,46 @@
 }
 .play-icon-disabled {
   display: none;
+}
+.player-profile-picure {
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+}
+.player-account-front {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  align-items: center;
+}
+.player-title {
+  color: aliceblue;
+}
+.player-account {
+  display: flex;
+  justify-content: space-between;
+  margin: 5%;
+  align-items: center;
+}
+.video-player:hover .controls-container {
+  transition: none;
+  opacity: 1;
+  position: absolute;
+  display: flex;
+  top: 40%;
+  width: 50%;
+  justify-content: space-around;
+}
+@media (min-width: 700px) {
+  .video-player {
+    max-height: 70vh;
+    margin: 3%;
+  }
+  #video-player {
+    border-radius: 15px;
+  }
+  .player-config {
+    margin-right: 0;
+    margin-bottom: 1%;
+  }
 }

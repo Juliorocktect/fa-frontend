@@ -17,7 +17,7 @@ function Home() {
       redirect: "follow",
     };
     fetch(
-      "http://192.168.178.95:9090/video/getVideosByLimit?limit=4",
+      "http://192.168.178.95:9090/video/getVideosByLimit?limit=10",
       requestOptions
     )
       .then((response) => response.json())

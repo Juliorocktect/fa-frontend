@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import "./Profile.css";
-import {
-  ArrowLeft12Filled,
-  AddCircle12Regular,
-  CheckmarkCircle16Filled,
-} from "@fluentui/react-icons";
+import { ArrowLeft12Filled, AddCircle12Regular } from "@fluentui/react-icons";
 import Video from "../../components/video/Video";
 import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, useSearchParams } from "react-router-dom";

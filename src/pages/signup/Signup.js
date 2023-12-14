@@ -61,7 +61,7 @@ function Signup() {
       />
       <button className="remove-btn" id="remove-btn">
         <Delete16Regular />
-        Remove
+        Removenpm
       </button>
     </div>`;
       var parent = (document.getElementById("profile-upload").innerHTML +=

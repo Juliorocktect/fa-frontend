@@ -1,6 +1,7 @@
 import React from "react";
 import "./Slider.css";
 function Slider() {
+  //TODO: add fetch and arrows for pc
   return (
     <>
       <div className="slider">
