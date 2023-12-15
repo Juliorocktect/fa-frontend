@@ -6,7 +6,6 @@ import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { useEffect } from "react";
-import { render } from "react-dom";
 function Profile() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -43,7 +42,6 @@ function Profile() {
   }
 
   function subscribe() {
-    //TODO: fix for mobile devices
     if (window.innerWidth >= 700) {
       document.getElementById("subscribe-button").classList.add("to-check");
       setTimeout(() => {
@@ -127,8 +125,8 @@ function Profile() {
             }}
           />
         </div>
-        <div className="video-container-profile">
-          <div className="profile-video-section" id="profile-video-section">
+        <div className="video-container-container">
+          <div className="video-container" id="profile-video-section">
             {
               <Video
                 preview={

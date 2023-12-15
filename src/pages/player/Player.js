@@ -7,6 +7,10 @@ import {
   SkipBack1020Regular,
   SkipForward1020Regular,
   Play12Filled,
+  Bookmark20Regular,
+  Bookmark20Filled,
+  Heart16Regular,
+  Heart16Filled,
 } from "@fluentui/react-icons";
 import { ArrowLeft12Filled, AddCircle12Regular } from "@fluentui/react-icons";
 import "./Player.css";
@@ -58,6 +62,7 @@ function Player() {
     let video = document.getElementById("video-player");
     video.requestFullscreen();
   }
+  //TODO: fix design for IOS
   return (
     <>
       <NavbarDesk></NavbarDesk>
@@ -93,7 +98,7 @@ function Player() {
               />
             </div>
           </div>
-          <video id="video-player">
+          <video id="video-player" autoPlay={false} controls={false}>
             <source src="http://192.168.178.95:80/video.mp4" type="video/mp4" />
           </video>
         </div>
@@ -109,6 +114,8 @@ function Player() {
             </h1>
           </div>
           <div className="player-account-back" id="player-account-back">
+            <Heart16Regular className="nav-icon" />
+            <Bookmark20Regular className="nav-icon" />
             <AddCircle12Regular
               className="nav-icon"
               id="subscribe-button"

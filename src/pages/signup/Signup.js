@@ -47,6 +47,7 @@ function Signup() {
       removePicture(1);
     };
   }
+  //TODO: fix images
 
   function renderBanner(bannerURL) {
     if (banner != 0) {
@@ -61,7 +62,7 @@ function Signup() {
       />
       <button className="remove-btn" id="remove-btn">
         <Delete16Regular />
-        Removenpm
+        Remove
       </button>
     </div>`;
       var parent = (document.getElementById("profile-upload").innerHTML +=

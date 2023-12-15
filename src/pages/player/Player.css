@@ -75,6 +75,7 @@
 @media (min-width: 700px) {
   .video-player {
     max-height: 70vh;
+    height: calc(var(--vh, 1vh) * 70);
     margin: 3%;
   }
   #video-player {
