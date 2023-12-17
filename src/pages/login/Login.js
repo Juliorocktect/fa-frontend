@@ -1,6 +1,7 @@
 import React from "react";
 import "./Login.css";
 import w from "./w.svg";
+import { getSession, setCookie } from "../../Cookie.js";
 
 function Login() {
   return (
@@ -28,7 +29,14 @@ function Login() {
                 />
               </div>
               <div className="submit-button-container">
-                <button className="sign-in-button">Anmelden</button>
+                <button
+                  className="sign-in-button"
+                  onClick={() => {
+                    setCookie("iouhgsdf987238b9zasdoi");
+                  }}
+                >
+                  Anmelden
+                </button>
               </div>
             </form>
           </div>

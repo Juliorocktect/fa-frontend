@@ -15,6 +15,7 @@ import {
 import { ArrowLeft12Filled, AddCircle12Regular } from "@fluentui/react-icons";
 import "./Player.css";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
+import { getSession } from "../../Cookie";
 function Player() {
   let playStatus = false;
   function playVideo() {
@@ -63,6 +64,7 @@ function Player() {
     video.requestFullscreen();
   }
   //TODO: fix design for IOS
+  //TODO: add element for video time
   return (
     <>
       <NavbarDesk></NavbarDesk>
@@ -108,6 +110,9 @@ function Player() {
               src="https://free4kwallpapers.com/uploads/originals/2015/10/04/nature._.jpg"
               alt=""
               className="player-profile-picure"
+              onClick={() => {
+                alert(getSession());
+              }}
             />
             <h1 className="player-title" id="player-title">
               Title

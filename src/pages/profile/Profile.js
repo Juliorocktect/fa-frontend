@@ -6,6 +6,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { useEffect } from "react";
+import { prettyFormat } from "@testing-library/react";
 function Profile() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -29,16 +30,15 @@ function Profile() {
         setDataAvailable(true);
       })
       .catch((error) => console.log("error", error));
-    renderBanner(user.bannerUrl);
+    renderProfile(user.bannerUrl, user.bannerUrl);
     if (!subscribed) {
     }
   }, [isDataAvailable]);
 
-  function renderBanner(bannerUrl) {
-    document
-      .getElementById("profile-pic-id-desk")
-      .setAttribute("src", bannerUrl);
-    document.getElementById("profile-pic-id").setAttribute("src", bannerUrl);
+  function renderProfile(profile, bannerUrl) {
+    document.getElementById("profile-pic-id-desk").setAttribute("src", profile);
+    document.getElementById("profile-pic-id").setAttribute("src", profile);
+    document.getElementById("profile-banner").setAttribute("src", bannerUrl);
   }
 
   function subscribe() {
@@ -100,6 +100,7 @@ function Profile() {
             src="https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp"
             alt=""
             className="profile-banner-img"
+            id="profile-banner"
           />
         </div>
         <div className="desk-bottom-section" id="profile-bottom">

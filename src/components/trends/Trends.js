@@ -1,29 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ChevronLeft12Regular,
   ChevronRight12Regular,
-  CurrencyDollarEuro16Filled,
 } from "@fluentui/react-icons";
 
 import "./Trends.css";
 
 function Trends() {
-  let imagesLinks = [
-    "https://wallup.net/wp-content/uploads/2016/01/65540-nature-forest-river.jpg",
-    "https://i2.wp.com/techbeasts.com/wp-content/uploads/2016/01/green_mountain_nature_wallpaper_hd.jpg",
-    "https://free4kwallpapers.com/uploads/originals/2015/10/04/nature._.jpg",
-    "https://wallpapers.com/images/featured-full/nature-2ygv7ssy2k0lxlzu.jpg",
-    "https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp",
-    "https://wallup.net/wp-content/uploads/2016/01/65540-nature-forest-river.jpg",
-    "https://free4kwallpapers.com/uploads/originals/2015/10/04/nature._.jpg",
-    "https://i2.wp.com/techbeasts.com/wp-content/uploads/2016/01/green_mountain_nature_wallpaper_hd.jpg",
-    "https://wallup.net/wp-content/uploads/2016/01/65540-nature-forest-river.jpg",
-    "https://free4kwallpapers.com/uploads/originals/2015/10/04/nature._.jpg",
-  ];
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const imagesLinks = [];
+
+  useEffect(() => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch("http://192.168.178.95:9090/video/trends", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setImages(result);
+        setLoading(true);
+        setContent();
+        intitialLoad();
+      })
+      .catch((error) => console.log("error", error));
+  }, [loading]);
+
+  function setContent() {
+    images.forEach((i) => {
+      imagesLinks.push(i.thumbnailUrl);
+    });
+    console.log(imagesLinks);
+  }
+  function intitialLoad() {
+    document.getElementById("left").setAttribute("src", images[0].thumbnailUrl);
+    document
+      .getElementById("center")
+      .setAttribute("src", images[1].thumbnailUrl);
+    document
+      .getElementById("right")
+      .setAttribute("src", images[2].thumbnailUrl);
+  }
   let current = 1;
-  //TODO: in neue Methoden refactoren und verschönern
+  //TODO: fix null pointer exception
   function next() {
-    if (current < imagesLinks.length - 1) {
+    if (current < images.length - 1) {
       var center = document.getElementById("center");
       var parent = document.getElementById("slider-trends");
       var buttonRight = document.getElementById("button-next");
@@ -47,10 +69,10 @@ function Trends() {
   }
   function createNewRight() {
     var newRight = document.createElement("img");
-    if (imagesLinks[current + 2] == null) {
-      newRight.classList.add("disabled");
-    }
-    newRight.setAttribute("src", imagesLinks[current + 2]);
+    //if (imagesLinks[current + 2] == null) {
+    //  newRight.classList.add("disabled");
+    //}
+    newRight.setAttribute("src", images[current + 2].thumbnailUrl);
     newRight.classList.add("right");
     newRight.classList.add("image-slider");
     newRight.id = "right";
@@ -58,7 +80,7 @@ function Trends() {
   }
   function createNewLeft() {
     var newLeft = document.createElement("img");
-    newLeft.setAttribute("src", imagesLinks[current - 2]);
+    newLeft.setAttribute("src", images[current - 2].thumbnailUrl);
     newLeft.classList.add("left");
     newLeft.classList.add("image-slider");
     newLeft.id = "left";

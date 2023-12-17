@@ -24,7 +24,6 @@ function Home() {
       .then((result) => {
         setVideos(result);
         setDataAvailable(true);
-        console.log(videos);
       })
       .catch((error) => console.log("error", error));
     if (isDataAvailable) {
