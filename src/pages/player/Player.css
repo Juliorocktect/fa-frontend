@@ -36,9 +36,17 @@
   justify-content: flex-end;
   bottom: 0;
   right: 0;
+  height: 25px;
+  margin-bottom: 5%;
+}
+.controls-icon {
+  height: 100%;
+  width: 100%;
 }
 .player-icon {
   margin-right: 2%;
+  width: 25px;
+  height: 25px;
 }
 .play-icon-disabled {
   display: none;
@@ -72,17 +80,55 @@
   width: 50%;
   justify-content: space-around;
 }
+.progress {
+  display: flex;
+  align-items: flex-start;
+  align-self: center;
+  width: 95%;
+  height: 5px;
+  background-color: rgba(68, 68, 68, 0.576);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 2%;
+  margin-left: 2.5%;
+}
+.progress-bar {
+  background-color: #ffffff6b;
+  height: 100%;
+  border-radius: 6px;
+}
+.player-account-front {
+  justify-content: flex-start;
+}
+.player-title {
+  margin-left: 10%;
+}
+
 @media (min-width: 700px) {
   .video-player {
-    max-height: 70vh;
-    height: calc(var(--vh, 1vh) * 70);
     margin: 3%;
+    max-width: 95%;
   }
   #video-player {
     border-radius: 15px;
   }
   .player-config {
     margin-right: 0;
-    margin-bottom: 1%;
+  }
+  .player-icon {
+    width: 35px;
+    height: 35px;
+  }
+  .player-title {
+    margin-left: 5%;
+  }
+  .player-account-back {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
   }
 }

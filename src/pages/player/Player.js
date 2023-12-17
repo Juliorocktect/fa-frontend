@@ -63,6 +63,9 @@ function Player() {
     let video = document.getElementById("video-player");
     video.requestFullscreen();
   }
+  function updateProgressBar(width) {
+    document.getElementById("progress-bar").style.width = width + "%";
+  }
   //TODO: fix design for IOS
   //TODO: add element for video time
   return (
@@ -75,7 +78,7 @@ function Player() {
             <Speaker216Regular className="nav-icon player-icon" />
             <div className="fullscreen-container player-icon">
               <ArrowMaximize16Filled
-                className="nav-icon "
+                className="nav-icon  player-icon"
                 onClick={toggleFullscreen}
               />
             </div>
@@ -100,7 +103,20 @@ function Player() {
               />
             </div>
           </div>
-          <video id="video-player" autoPlay={false} controls={false}>
+          <div className="progress">
+            <div className="progress-bar" id="progress-bar"></div>
+          </div>
+          <video
+            id="video-player"
+            autoPlay={false}
+            controls={false}
+            onTimeUpdate={(e) => {
+              updateProgressBar(
+                (e.target.currentTime / e.target.duration) * 100
+              );
+              console.log();
+            }}
+          >
             <source src="http://192.168.178.95:80/video.mp4" type="video/mp4" />
           </video>
         </div>
