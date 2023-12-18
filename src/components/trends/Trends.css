@@ -20,15 +20,15 @@
   display: flex;
   align-content: center;
   margin-top: 5%;
-  height: 40vh;
   width: 100%;
 }
 .image-slider {
   width: 90%;
-  height: 100%;
   overflow: hidden;
   border-radius: 22px;
   transition: ease-in-out 350ms;
+  aspect-ratio: 10/6;
+  max-height: 70vh;
 }
 .left {
   transition: ease-in-out 350ms;

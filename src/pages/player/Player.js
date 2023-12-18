@@ -85,6 +85,9 @@ function Player() {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
+    document.getElementById(
+      "player-account-back"
+    ).innerHTML += `<svg fill="currentColor" class="nav-icon ___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M7.54 3.95a3.25 3.25 0 0 0-4.6-.01 3.25 3.25 0 0 0 .02 4.6l4.7 4.7c.2.2.52.2.71 0l4.69-4.68a3.25 3.25 0 0 0-4.61-4.6l-.46.44-.45-.45Z" fill="currentColor"></path></svg>`;
   }
   //TODO: fix design for IOS
   //TODO: add animations to like and save
@@ -160,6 +163,8 @@ function Player() {
           </div>
           <div className="player-account-back" id="player-account-back">
             <Heart16Regular className="nav-icon" onClick={like} />
+            <Heart16Filled className="nav-icon" />
+            <Bookmark20Filled className="nav-icon" />
             <Bookmark20Regular className="nav-icon" />
             <AddCircle12Regular
               className="nav-icon"
