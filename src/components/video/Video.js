@@ -3,10 +3,11 @@ import "./Video.css";
 import { useNavigate } from "react-router-dom";
 function Video({ preview, profile, title, description, videoId }) {
   const nav = useNavigate();
+  const location = "/player?id=" + videoId;
   return (
     <>
       <div className="video" id="video">
-        <a href="/player/${videos[i].id}">
+        <a href={location}>
           <div className="video-top-section" id="video-top-section">
             <img
               src={preview}

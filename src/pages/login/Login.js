@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import w from "./w.svg";
-import { getSession, setCookie } from "../../Cookie.js";
+import { getSession, setSession } from "../../Cookie.js";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const [userName, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  function getUrlByForm() {
+    const Url = new URL("http://192.168.178.95:9090/user/auth");
+    Url.searchParams.append("userName", userName);
+    Url.searchParams.append("password", password);
+    return Url.toString();
+  }
+  function sendForm() {
+    var requestOptions = {
+      method: "POST",
+      redirect: "follow",
+    };
+
+    fetch(getUrlByForm(), requestOptions)
+      .then((response) => {
+        if (response.status == 200) {
+          return response.text();
+        } else {
+          throw new Error("HTTP Status:" + response.status);
+        }
+      })
+      .then((result) => {
+        setSession(result);
+        navigate("/");
+      })
+      .catch((error) => console.log("error", error));
+  }
   return (
     <>
       <div className="login-page">
@@ -17,7 +47,10 @@ function Login() {
                 <input
                   type="text"
                   className="login-input"
-                  placeholder="Email"
+                  placeholder="User Name"
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
                 />
               </div>
               <div className="passwd-container">
@@ -26,13 +59,17 @@ function Login() {
                   type="password"
                   className="login-input"
                   placeholder="Passwort"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
               </div>
               <div className="submit-button-container">
                 <button
                   className="sign-in-button"
-                  onClick={() => {
-                    setCookie("iouhgsdf987238b9zasdoi");
+                  onClick={(e) => {
+                    e.preventDefault();
+                    sendForm();
                   }}
                 >
                   Anmelden

@@ -24,6 +24,7 @@ function Home() {
       .then((result) => {
         setVideos(result);
         setDataAvailable(true);
+        console.log(result);
       })
       .catch((error) => console.log("error", error));
     if (isDataAvailable) {
@@ -45,6 +46,7 @@ function Home() {
                 profile={video.profilePicture}
                 title={video.title}
                 description={video.description}
+                videoId={video.id}
               />
             ))}
           </div>

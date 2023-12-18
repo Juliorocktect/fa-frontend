@@ -1,4 +1,4 @@
-function setCookie(value) {
+function setSession(value) {
   const d = new Date();
   d.setTime(d.getTime() + 15 * 60 * 60 * 14 * 1000);
   document.cookie =
@@ -13,4 +13,4 @@ function getSession() {
   return y;
 }
 
-export { getSession, setCookie };
+export { getSession, setSession };

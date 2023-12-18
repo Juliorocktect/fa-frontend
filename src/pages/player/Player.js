@@ -16,7 +16,11 @@ import { ArrowLeft12Filled, AddCircle12Regular } from "@fluentui/react-icons";
 import "./Player.css";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { getSession } from "../../Cookie";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 function Player() {
+  const [searchParams] = useSearchParams();
+  let hasLiked = false;
   let playStatus = false;
   function playVideo() {
     let video = document.getElementById("video-player");
@@ -66,8 +70,24 @@ function Player() {
   function updateProgressBar(width) {
     document.getElementById("progress-bar").style.width = width + "%";
   }
+  function buildLikeUrl() {
+    const url = new URL("http://localhost:9090/video/like");
+    url.searchParams.append("videoId", searchParams.get("id"));
+    url.searchParams.append("session", getSession());
+    return url.toString();
+  }
+  function like() {
+    var requestOptions = {
+      method: "POST",
+      redirect: "follow",
+    };
+    fetch(buildLikeUrl(), requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  }
   //TODO: fix design for IOS
-  //TODO: add element for video time
+  //TODO: add animations to like and save
   return (
     <>
       <NavbarDesk></NavbarDesk>
@@ -117,7 +137,11 @@ function Player() {
               console.log();
             }}
           >
-            <source src="http://192.168.178.95:80/video.mp4" type="video/mp4" />
+            <source
+              src="http://192.168.178.95:80/video.mp4"
+              type="video/mp4"
+              id="source"
+            />
           </video>
         </div>
         <div className="player-account">
@@ -135,7 +159,7 @@ function Player() {
             </h1>
           </div>
           <div className="player-account-back" id="player-account-back">
-            <Heart16Regular className="nav-icon" />
+            <Heart16Regular className="nav-icon" onClick={like} />
             <Bookmark20Regular className="nav-icon" />
             <AddCircle12Regular
               className="nav-icon"
