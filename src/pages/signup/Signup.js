@@ -6,6 +6,10 @@ import { ArrowUpload16Filled, Delete16Regular } from "@fluentui/react-icons";
 function Signup() {
   const [picture, setPicture] = useState(Object);
   const [banner, setBanner] = useState(Object);
+  const [pic, setPic] = useState(null);
+  const [ban, setBan] = useState(null);
+  const [userName, setUsername] = useState("");
+  const [passwd, setPasswd] = useState("");
   var profileUploaded = "";
 
   function removePicture(which) {
@@ -48,7 +52,24 @@ function Signup() {
     };
   }
   //TODO: fix images
+  function createUser() {
+    var formdata = new FormData();
+    formdata.append("userName", userName);
+    formdata.append("passwd", passwd);
+    formdata.append("picture", pic);
+    formdata.append("banner", ban);
 
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch("http://Localhost:9090/user/createUser", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  }
   function renderBanner(bannerURL) {
     if (banner != 0) {
       document.getElementById("banner-form").remove();
@@ -81,15 +102,33 @@ function Signup() {
           <img src={logo} alt="" className="logo" />
           <h1 className="login-title">Account Erstellen</h1>
           <div className="signup-form">
-            <form action="" className="signup-form-form">
+            <form
+              action=""
+              className="signup-form-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
               <div className="signup-upper-section">
                 <div className="signup-username-form">
                   <label htmlFor="username">User name</label>
-                  <input type="text" className="signup-input" />
+                  <input
+                    type="text"
+                    className="signup-input"
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
+                  />
                 </div>
                 <div className="signup-password-form">
                   <label htmlFor="Password">Password</label>
-                  <input type="password" className="signup-input" />
+                  <input
+                    type="password"
+                    className="signup-input"
+                    onChange={(e) => {
+                      setPasswd(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
               <div id="profile-upload">
@@ -106,6 +145,7 @@ function Signup() {
                       if (e.target.files && e.target.files.length > 0) {
                         e.preventDefault();
                         setPicture(e.target.files);
+                        setPic(e.target.files[0]);
                         var image = [];
                         image.push(e.target.files[0]);
                         renderPicture(URL.createObjectURL(new Blob(image)));
@@ -135,6 +175,7 @@ function Signup() {
                       if (e.target.files && e.target.files.length > 0) {
                         e.preventDefault();
                         setBanner(e.target.files);
+                        setBan(e.target.files[0]);
                         var image = [];
                         image.push(e.target.files[0]);
                         renderBanner(URL.createObjectURL(new Blob(image)));
@@ -151,7 +192,15 @@ function Signup() {
               <div className="sign-up-bottom">
                 <div className="submit-container">
                   <button className="sign-up-button-cancel">Cancel</button>
-                  <button className="sign-up-button">Save</button>
+                  <button
+                    className="sign-up-button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      createUser();
+                    }}
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
             </form>
