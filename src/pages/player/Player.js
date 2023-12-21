@@ -16,7 +16,7 @@ import { ArrowLeft12Filled, AddCircle12Regular } from "@fluentui/react-icons";
 import "./Player.css";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { getSession } from "../../Cookie";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function Player() {
   const [searchParams] = useSearchParams();
@@ -131,13 +131,13 @@ function Player() {
           </div>
           <video
             id="video-player"
-            autoPlay={false}
+            autoPlay={true}
             controls={false}
+            width="100%"
             onTimeUpdate={(e) => {
               updateProgressBar(
                 (e.target.currentTime / e.target.duration) * 100
               );
-              console.log();
             }}
           >
             <source

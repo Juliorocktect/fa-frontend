@@ -8,10 +8,12 @@ import "./Trends.css";
 
 function Trends() {
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
   const imagesLinks = [];
+  const useMountEffect = (fun) => useEffect(fun, []);
 
-  useEffect(() => {
+  useMountEffect(fetchVideos);
+
+  function fetchVideos() {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -20,19 +22,11 @@ function Trends() {
       .then((response) => response.json())
       .then((result) => {
         setImages(result);
-        setLoading(true);
-        setContent();
         intitialLoad();
       })
       .catch((error) => console.log("error", error));
-  }, [loading]);
-
-  function setContent() {
-    images.forEach((i) => {
-      imagesLinks.push(i.thumbnailUrl);
-    });
-    console.log(imagesLinks);
   }
+
   function intitialLoad() {
     document.getElementById("left").setAttribute("src", images[0].thumbnailUrl);
     document
@@ -126,6 +120,7 @@ function Trends() {
           className="image-slider"
           id="center"
           src="https://free4kwallpapers.com/uploads/originals/2015/10/04/nature._.jpg"
+          decoding="asnyc"
         />
         <button className="slider-button" id="button-next">
           <ChevronRight12Regular className="slider-arrow" onClick={next} />

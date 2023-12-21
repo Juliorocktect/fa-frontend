@@ -1,19 +1,26 @@
 import React from "react";
 import "./Video.css";
-import { useNavigate } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import placeholder from "./l.jpg";
 function Video({ preview, profile, title, description, videoId }) {
-  const nav = useNavigate();
   const location = "/player?id=" + videoId;
+  const locationProfile = "/profile?=" + videoId;
   return (
     <>
       <div className="video" id="video">
         <a href={location}>
           <div className="video-top-section" id="video-top-section">
-            <img
+            <LazyLoadImage
+              sizes="(max-width: 600px)"
+              className="preview-img"
               src={preview}
               alt="preview"
-              className="preview-img"
               id="preview-img"
+              loading="lazy"
+              fetchpriority="high"
+              decoding="async"
+              effect="blur"
+              placeholderSrc={placeholder}
             />
           </div>
         </a>
@@ -21,12 +28,18 @@ function Video({ preview, profile, title, description, videoId }) {
           className="video-description-section"
           id="video-description-section"
         >
-          <a href="/profile?id=">
+          <a href={locationProfile}>
             <div className="profile-section" id="profile-section">
               <img
-                src={profile}
+                src="http://192.168.178.95/videos/00f97beb-5351-446b-a6b7-01e3abdbad68/00f97beb-5351-446b-a6b7-01e3abdbad68.jpeg"
                 className="video-profile-pic"
                 id="video-profile-pic"
+                loading="lazy"
+                fetchpriority="high"
+                decoding="async"
+                sizes="(max-width: 100px)"
+                width="600"
+                height="400"
               />
             </div>
           </a>

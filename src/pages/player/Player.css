@@ -11,11 +11,26 @@
   max-height: 80vh;
   aspect-ratio: 16/9;
 }
+#video-player::-webkit-media-controls-panel {
+  display: none !important;
+
+  -webkit-appearance: none;
+}
+#video-player::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+#video-player::--webkit-media-controls-play-button {
+  display: none;
+  -webkit-appearance: none;
+}
 .player-config {
   position: absolute;
 }
 #video-player {
   z-index: -2;
+  width: 100vw;
+  top: 0;
 }
 .video-player {
   display: flex;

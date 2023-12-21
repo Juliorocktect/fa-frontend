@@ -11,13 +11,18 @@ import { useState } from "react";
 function Home() {
   const [videos, setVideos] = useState([]);
   const [isDataAvailable, setDataAvailable] = useState(false);
-  useEffect(() => {
+  const useMountEffect = (fun) => useEffect(fun, []);
+  if (!isDataAvailable) {
+    fetchVideos();
+  }
+  async function fetchVideos() {
+    console.log("fetching");
     var requestOptions = {
       method: "GET",
       redirect: "follow",
     };
-    fetch(
-      "http://192.168.178.95:9090/video/getVideosByLimit?limit=10",
+    await fetch(
+      "http://192.168.178.95:9090/video/getVideosByLimit?limit=30",
       requestOptions
     )
       .then((response) => response.json())
@@ -27,9 +32,7 @@ function Home() {
         console.log(result);
       })
       .catch((error) => console.log("error", error));
-    if (isDataAvailable) {
-    }
-  }, [isDataAvailable]);
+  }
   //TODO: only load shown content + extra
   //TODO: load new Content if old content isnt shown
   return (

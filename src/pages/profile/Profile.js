@@ -6,7 +6,6 @@ import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { useEffect } from "react";
-import { prettyFormat } from "@testing-library/react";
 function Profile() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ function Profile() {
         setDataAvailable(true);
       })
       .catch((error) => console.log("error", error));
-    renderProfile(user.bannerUrl, user.bannerUrl);
+    //renderProfile(user.bannerUrl, user.bannerUrl);
     if (!subscribed) {
     }
   }, [isDataAvailable]);
