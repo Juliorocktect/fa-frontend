@@ -93,6 +93,25 @@ a {
   margin: 0;
   margin-left: 5%;
 }
+.smaller-title {
+  font-size: medium;
+}
+.smaller-description {
+  font-size: x-small;
+}
+#video-small {
+  margin-left: 1rem;
+  padding: 2.5%;
+  min-width: 60%;
+}
+#preview-img-small {
+  width: 50vw;
+}
+.video-profile-pic-small {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+}
 @media (min-width: 700px) {
   #video {
     padding: 5%;

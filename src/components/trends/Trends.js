@@ -22,6 +22,7 @@ function Trends() {
       .then((response) => response.json())
       .then((result) => {
         setImages(result);
+        console.log(result);
         intitialLoad();
       })
       .catch((error) => console.log("error", error));
@@ -36,7 +37,7 @@ function Trends() {
       .getElementById("right")
       .setAttribute("src", images[2].thumbnailUrl);
   }
-  let current = 1;
+  let current = 0;
   //TODO: fix null pointer exception
   function next() {
     if (current < images.length - 1) {

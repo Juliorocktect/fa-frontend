@@ -9,6 +9,8 @@ import Login from "./login/Login";
 import Trends from "../components/trends/Trends";
 import Signup from "./signup/Signup";
 import Upload from "./upload/Upload";
+import Dashboard from "./dashboard/Dashboard";
+import TrendsNew from "../components/trendsNew/TrendsNew";
 function App() {
   return (
     <>
@@ -22,9 +24,10 @@ function App() {
         <Route path="/player" element={<Player />}></Route>
         <Route path="/player/:query" element={<Player />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/slider" element={<Trends />}></Route>
+        <Route path="/slider" element={<TrendsNew />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/upload" element={<Upload />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </>
   );

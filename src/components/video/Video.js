@@ -2,9 +2,64 @@ import React from "react";
 import "./Video.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import placeholder from "./l.jpg";
-function Video({ preview, profile, title, description, videoId }) {
+function Video({ preview, profile, title, description, videoId, mode }) {
   const location = "/player?id=" + videoId;
-  const locationProfile = "/profile?=" + videoId;
+  const locationProfile = "/profile?id=" + videoId;
+  if ("small" === mode) {
+    return (
+      <>
+        <div className="video" id="video-small">
+          <a href={location}>
+            <div className="video-top-section" id="video-top-section">
+              <LazyLoadImage
+                sizes="(max-width: 600px)"
+                className="preview-img-small"
+                src={preview}
+                alt="preview"
+                id="preview-img"
+                loading="lazy"
+                fetchpriority="high"
+                decoding="async"
+                effect="blur"
+                placeholderSrc={placeholder}
+              />
+            </div>
+          </a>
+          <div
+            className="video-description-section"
+            id="video-description-section"
+          >
+            <a href={locationProfile}>
+              <div className="profile-section" id="profile-section">
+                <img
+                  src={profile}
+                  className="video-profile-pic-small"
+                  id="video-profile-pic-small"
+                  loading="lazy"
+                  fetchpriority="high"
+                  decoding="async"
+                  sizes="(max-width: 100px)"
+                  width="600"
+                  height="400"
+                />
+              </div>
+            </a>
+            <div className="data-section" id="data-section">
+              <h3 className="video-title smaller-title" id="video-title">
+                {title}
+              </h3>
+              <p
+                className="video-description smaller-description"
+                id="video-description"
+              >
+                {description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div className="video" id="video">
@@ -31,7 +86,7 @@ function Video({ preview, profile, title, description, videoId }) {
           <a href={locationProfile}>
             <div className="profile-section" id="profile-section">
               <img
-                src="http://192.168.178.95/videos/00f97beb-5351-446b-a6b7-01e3abdbad68/00f97beb-5351-446b-a6b7-01e3abdbad68.jpeg"
+                src={profile}
                 className="video-profile-pic"
                 id="video-profile-pic"
                 loading="lazy"

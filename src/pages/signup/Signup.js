@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Signup.css";
 import logo from "..//../icons/w.svg";
 import { ArrowUpload16Filled, Delete16Regular } from "@fluentui/react-icons";
+import { useNavigate } from "react-router-dom";
+import { setSession } from "../../Cookie";
 
 function Signup() {
   const [picture, setPicture] = useState(Object);
@@ -10,6 +12,7 @@ function Signup() {
   const [ban, setBan] = useState(null);
   const [userName, setUsername] = useState("");
   const [passwd, setPasswd] = useState("");
+  const nav = useNavigate();
   var profileUploaded = "";
 
   function removePicture(which) {
@@ -66,8 +69,16 @@ function Signup() {
     };
 
     fetch("http://Localhost:9090/user/createUser", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((response) => {
+        if (response.status == 200) {
+          return response.text();
+        } else {
+          throw new Error("HTTP Status:" + response.status);
+        }
+      })
+      .then((result) => {
+        nav("/login");
+      })
       .catch((error) => console.log("error", error));
   }
   function renderBanner(bannerURL) {

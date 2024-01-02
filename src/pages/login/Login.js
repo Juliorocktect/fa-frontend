@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./Login.css";
 import w from "./w.svg";
-import { getSession, setSession } from "../../Cookie.js";
-import { useNavigate } from "react-router-dom";
+import { setSession } from "../../Cookie.js";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Login() {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   function getUrlByForm() {
     const Url = new URL("http://192.168.178.95:9090/user/auth");
     Url.searchParams.append("userName", userName);
@@ -30,7 +31,7 @@ function Login() {
       })
       .then((result) => {
         setSession(result);
-        navigate("/");
+        window.location.href = "/dashboard";
       })
       .catch((error) => console.log("error", error));
   }

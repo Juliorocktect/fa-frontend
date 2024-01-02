@@ -9,8 +9,7 @@ import { useEffect } from "react";
 function Profile() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [isDataAvailable, setDataAvailable] = useState(false);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
   var subscribed = false;
 
   useEffect(() => {
@@ -26,13 +25,12 @@ function Profile() {
       .then((response) => response.json())
       .then((result) => {
         setUser(result);
-        setDataAvailable(true);
+        //TODO: useState bool
+        renderProfile(result.profilUrl, result.bannerUrl);
       })
+      .then(() => {})
       .catch((error) => console.log("error", error));
-    //renderProfile(user.bannerUrl, user.bannerUrl);
-    if (!subscribed) {
-    }
-  }, [isDataAvailable]);
+  }, []);
 
   function renderProfile(profile, bannerUrl) {
     document.getElementById("profile-pic-id-desk").setAttribute("src", profile);
@@ -89,14 +87,14 @@ function Profile() {
               <img src="" alt="" id="profile-pic-id" />
             </div>
             <div className="profile-title">
-              <h3 className="profile-title-h3">Julio</h3>
+              <h3 className="profile-title-h3">{user.userName}</h3>
               <h6 className="profile-title-h6">125K Abonnenten</h6>
             </div>
           </div>
         </div>
         <div className="profile-banner">
           <img
-            src="https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp"
+            src=""
             alt=""
             className="profile-banner-img"
             id="profile-banner"

@@ -45,7 +45,7 @@ function NavbarDesk() {
             <Person12Regular
               className="nav-icon"
               onClick={() => {
-                navigate("/login");
+                navigate("/dashboard");
               }}
             />
           </div>
