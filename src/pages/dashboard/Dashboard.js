@@ -14,6 +14,8 @@ import { getSession, setSession } from "../../Cookie";
 function Dashboard() {
   const [selection, setSelection] = useState("history");
   const [valid, setValid] = useState(false);
+  const [savedVideos, setSavedVideos] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     var requestOptions = {
@@ -43,12 +45,16 @@ function Dashboard() {
     fetch(
       "http://192.168.178.95:9090/user/" +
         selection +
-        "?session" +
+        "?session=" +
         getSession(),
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => {
+        setSavedVideos(result);
+        console.log(result);
+        setLoaded(true);
+      })
       .catch((error) => console.log("error", error));
     console.log(selection);
   }, [selection]);
@@ -164,17 +170,15 @@ function Dashboard() {
                 description={"oijdsfiniopuiasd sdasd"}
               />
             ))}
-          {selection == "saved" &&
-            Array.from({ length: 40 }, (_, i) => (
+          {selection === "saved" &&
+            savedVideos.map((video) => (
               <Video
-                preview={
-                  "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-                }
-                profile={
-                  "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-                }
-                title={"Saved"}
-                description={"oijdsfiniopuiasd sdasd"}
+                preview={video.thumbnailUrl}
+                profile={video.profilePicture}
+                title={video.title}
+                description={video.description}
+                videoId={video.id}
+                profileId={video.authorId} 
               />
             ))}
           {selection == "liked" &&

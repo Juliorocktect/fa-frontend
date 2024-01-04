@@ -2,9 +2,17 @@ import React from "react";
 import "./Video.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import placeholder from "./l.jpg";
-function Video({ preview, profile, title, description, videoId, mode }) {
+function Video({
+  preview,
+  profile,
+  title,
+  description,
+  videoId,
+  mode,
+  profileId,
+}) {
   const location = "/player?id=" + videoId;
-  const locationProfile = "/profile?id=" + videoId;
+  const locationProfile = "/profile?id=" + profileId;
   if ("small" === mode) {
     return (
       <>

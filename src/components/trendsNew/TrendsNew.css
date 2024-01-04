@@ -7,6 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  display: block;
 }
 #wrapper {
   aspect-ratio: 16/9;
@@ -79,4 +80,9 @@ button {
 }
 .point-active {
   background-color: aliceblue;
+}
+@media (max-width: 800px) {
+  .trends-carousel {
+    display: none;
+  }
 }

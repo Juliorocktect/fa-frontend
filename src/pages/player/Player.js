@@ -17,10 +17,11 @@ import "./Player.css";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { getSession } from "../../Cookie";
 import { useSearchParams } from "react-router-dom";
+import NotFound from "../../components/notFound/NotFound";
 
 function Player() {
   const [searchParams] = useSearchParams();
-  const [videoData, setVideoData] = useState("");
+  const [videoData, setVideoData] = useState(null);
   let hasLiked = false;
   let playStatus = false;
   let saved = false;
@@ -160,6 +161,9 @@ function Player() {
   //TODO: add css transition to controls and progress bar
   //TODO: controls in fullscreen
   //TODO: add settings + volume slider
+  if (videoData == null || searchParams.get("id") === "") {
+    return <NotFound />;
+  }
   return (
     <>
       <NavbarDesk></NavbarDesk>

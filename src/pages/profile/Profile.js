@@ -6,37 +6,46 @@ import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { useEffect } from "react";
+import NotFound from "../../components/notFound/NotFound";
 function Profile() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [videosUploaded, setVideosUploaded] = useState([]);
+  const [videosLoaded, setVideosLoaded] = useState(false);
   var subscribed = false;
 
-  useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-    fetch(
-      "http://192.168.178.95:9090/user/getUser?userId=" +
-        searchParams.get("id"),
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        setUser(result);
-        //TODO: useState bool
-        renderProfile(result.profilUrl, result.bannerUrl);
-      })
-      .then(() => {})
-      .catch((error) => console.log("error", error));
-  }, []);
+  async function fetchPrimaryData() {
+    try {
+      const response1 = await fetch(
+        "http://192.168.178.95:9090/user/getUser?userId=" +
+          searchParams.get("id")
+      );
+      const data = await response1.json();
 
-  function renderProfile(profile, bannerUrl) {
-    document.getElementById("profile-pic-id-desk").setAttribute("src", profile);
-    document.getElementById("profile-pic-id").setAttribute("src", profile);
-    document.getElementById("profile-banner").setAttribute("src", bannerUrl);
+      console.log(data);
+      var urls = [];
+      data.videosUploaded.forEach((id) => {
+        urls.push(
+          fetch(
+            "http://192.168.178.95:9090/video/getVideoById?videoId=" + id
+          ).then((res) => res.json())
+        );
+      });
+      const data2 = await Promise.all(urls);
+      setVideosUploaded(data2);
+      setVideosLoaded(true);
+      setUser(data);
+      setLoading(true);
+    } catch (error) {
+      console.log("Error", error);
+    }
   }
+  useEffect(() => {
+    fetchPrimaryData();
+  }, []);
+  //TODO: load uploaded videos
 
   function subscribe() {
     if (window.innerWidth >= 700) {
@@ -61,7 +70,13 @@ function Profile() {
       }, 290);
     }
   }
-
+  if (searchParams.get("id") === "" || user == null) {
+    return (
+      <>
+        <NotFound />
+      </>
+    );
+  }
   return (
     <>
       <NavbarDesk></NavbarDesk>
@@ -84,35 +99,41 @@ function Profile() {
           </div>
           <div className="profile-name">
             <div className="profile-title-img">
-              <img src="" alt="" id="profile-pic-id" />
+              {loading && <img src={user.pictureUrl} id="profile-pic" />}
             </div>
             <div className="profile-title">
-              <h3 className="profile-title-h3">{user.userName}</h3>
-              <h6 className="profile-title-h6">125K Abonnenten</h6>
+              <h3 className="profile-title-h3">{loading && user.userName}</h3>
+              <h6 className="profile-title-h6">
+                {loading && user.subs} Abonnenten
+              </h6>
             </div>
           </div>
         </div>
         <div className="profile-banner">
-          <img
-            src=""
-            alt=""
-            className="profile-banner-img"
-            id="profile-banner"
-          />
+          {loading && (
+            <img
+              src={user.bannerUrl}
+              alt=""
+              className="profile-banner-img"
+              id="profile-banner"
+            />
+          )}
         </div>
         <div className="desk-bottom-section" id="profile-bottom">
           <div className="profile-name">
             <div className="profile-title-img">
-              <img
-                src=""
-                alt=""
-                className="profile-pic"
-                id="profile-pic-id-desk"
-              />
+              {loading && (
+                <img
+                  src={user.pictureUrl}
+                  alt=""
+                  className="profile-pic"
+                  id="profile-pic-id-desk"
+                />
+              )}
             </div>
             <div className="profile-title">
-              <h3 className="profile-title-h3">Julio</h3>
-              <h6 className="profile-title-h6">125K Abonnenten</h6>
+              <h3 className="profile-title-h3">{loading && user.userName}</h3>
+              <h6 className="profile-title-h6">{user.subs} Abonnenten</h6>
             </div>
           </div>
           <AddCircle12Regular
@@ -124,19 +145,18 @@ function Profile() {
           />
         </div>
         <div className="video-container-container">
-          <div className="video-container" id="profile-video-section">
-            {
-              <Video
-                preview={
-                  "https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp"
-                }
-                profile={
-                  "https://www.pixground.com/wp-content/uploads/2023/03/Windows-11-Landscape-Scenery-Wallpaper-4K-Wallpaper-1024x576.webp"
-                }
-                title={"Test"}
-                description={"IOUA INUHOAIP"}
-              />
-            }
+          <div className="video-container" id="videoContainer">
+            {videosLoaded &&
+              videosUploaded.map((video) => (
+                <Video
+                  preview={video.thumbnailUrl}
+                  profile={video.profilePicture}
+                  title={video.title}
+                  description={video.description}
+                  videoId={video.id}
+                  profileId={video.authorId}
+                />
+              ))}
           </div>
         </div>
       </div>

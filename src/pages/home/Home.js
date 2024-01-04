@@ -4,13 +4,13 @@ import "./Home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Slider from "../../components/slider/Slider";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
-import Trends from "../../components/trends/Trends";
 import "../../components/video/Video.css";
 import { useState } from "react";
 import TrendsNew from "../../components/trendsNew/TrendsNew";
 
 function Home() {
   const [videos, setVideos] = useState([]);
+  const [load, setLoad] = useState(false);
   useEffect(() => {
     var requestOptions = {
       method: "GET",
@@ -23,6 +23,7 @@ function Home() {
       .then((response) => response.json())
       .then((result) => {
         setVideos(result);
+        setLoad(true);
         console.log(result);
       })
       .catch((error) => console.log("error", error));
@@ -38,15 +39,17 @@ function Home() {
         <Slider></Slider>
         <div className="video-container-container">
           <div className="video-container" id="videoContainer">
-            {videos.map((video) => (
-              <Video
-                preview={video.thumbnailUrl}
-                profile={video.profilePicture}
-                title={video.title}
-                description={video.description}
-                videoId={video.id}
-              />
-            ))}
+            {load &&
+              videos.map((video) => (
+                <Video
+                  preview={video.thumbnailUrl}
+                  profile={video.profilePicture}
+                  title={video.title}
+                  description={video.description}
+                  videoId={video.id}
+                  profileId={video.authorId}
+                />
+              ))}
           </div>
         </div>
         <div className="navbar-home">

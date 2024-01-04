@@ -1,0 +1,94 @@
+.black-filter {
+  display: none;
+}
+
+.not-found-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+.not-found-image {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.black-filter {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.952);
+  z-index: -4;
+  overflow: hidden;
+}
+.not-title {
+  color: aliceblue;
+  font-size: 10vw;
+  z-index: -3;
+  position: relative;
+}
+.back-section {
+  display: flex;
+  flex-direction: column;
+}
+@font-face {
+  font-family: "dosis";
+  src: url("Dosis-Bold.ttf") format("woff"),
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ url("Dosis-Bold.ttf")
+      format("truetype"); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+.back-title {
+  color: rgb(115, 172, 222);
+  font-size: 50vw;
+  font-family: dosis;
+  font-weight: 500;
+  margin: 0;
+  top: 20%;
+}
+.back-btn {
+  background-color: aliceblue;
+  border: 2px solid #000;
+  z-index: 3;
+}
+
+.blob {
+  background-color: rgba(255, 255, 255, 0.27);
+  width: 15%;
+  height: 15vh;
+  filter: blur(10px);
+  border-radius: 500%;
+  transform: translate(200px, 300px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+@media (max-width: 900px) {
+}
+.imf-img {
+  border-radius: 25px;
+  aspect-ratio: 16/9;
+  width: 80%;
+  max-width: 900px;
+  position: relative;
+}
+.imf-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.btn-back {
+  font-family: dosis;
+  color: #000;
+  background-color: #73acde;
+  border: none;
+  width: 60%;
+  padding: 20px 0px;
+  font-size: x-large;
+  margin-top: 5vh;
+}
