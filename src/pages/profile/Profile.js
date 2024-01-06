@@ -23,7 +23,6 @@ function Profile() {
           searchParams.get("id")
       );
       const data = await response1.json();
-
       console.log(data);
       var urls = [];
       data.videosUploaded.forEach((id) => {

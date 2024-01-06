@@ -18,6 +18,7 @@ import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { getSession } from "../../Cookie";
 import { useSearchParams } from "react-router-dom";
 import NotFound from "../../components/notFound/NotFound";
+import BookMarkFilled from "./bookmarkFilled.svg";
 
 function Player() {
   const [searchParams] = useSearchParams();
@@ -25,6 +26,32 @@ function Player() {
   let hasLiked = false;
   let playStatus = false;
   let saved = false;
+  var seconds = 0;
+  var tens = 0;
+  var Interval;
+  const [load, setLoad] = useState(false);
+  var watched = false;
+
+  function startTimerFn() {
+    clearInterval(Interval);
+    Interval = setInterval(startTimer, 10);
+  }
+
+  function stop() {
+    clearInterval(Interval);
+  }
+
+  function startTimer() {
+    tens++;
+    if (tens > 99) {
+      seconds++;
+      tens = 0;
+      console.log(seconds);
+    }
+    if (seconds > 30 && !watched) {
+      watch();
+    }
+  }
 
   useEffect(() => {
     fetchVideoData();
@@ -45,6 +72,8 @@ function Player() {
       .then((result) => {
         setVideoData(result);
         console.log(videoData);
+        //TODO:renew
+        setLoad(true);
         document.getElementById("video-player").innerHTML = `<source
       src="${videoData.videoUrl}"
       type="video/mp4"
@@ -58,10 +87,12 @@ function Player() {
     if (playStatus) {
       video.pause();
       displayPaused();
+      stop();
       playStatus = false;
     } else {
       video.play();
       displayPlay();
+      startTimerFn();
       playStatus = true;
     }
   }
@@ -104,7 +135,7 @@ function Player() {
     document.getElementById("progress-bar").style.width = width + "%";
   }
   function buildLikeUrl() {
-    const url = new URL("http://localhost:9090/video/like");
+    const url = new URL("http://localhost:9090/user/like");
     url.searchParams.append("videoId", searchParams.get("id"));
     url.searchParams.append("session", getSession());
     return url.toString();
@@ -151,6 +182,7 @@ function Player() {
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
+      document.getElementById("save-icon").innerHTML = "";
       saved = true;
     } else {
       saved = false;
@@ -161,6 +193,24 @@ function Player() {
   //TODO: add css transition to controls and progress bar
   //TODO: controls in fullscreen
   //TODO: add settings + volume slider
+
+  function watch() {
+    var requestOptions = {
+      method: "POST",
+      redirect: "manual",
+    };
+
+    fetch(
+      "http://192.168.178.95:9090/user/watch?session=" +
+        getSession() +
+        "&videoId=" +
+        searchParams.get("id"),
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => null)
+      .catch((error) => console.log("error", error));
+  }
   if (videoData == null || searchParams.get("id") === "") {
     return <NotFound />;
   }
@@ -213,12 +263,14 @@ function Player() {
               );
             }}
             playsInline
+            onEnded={() => {
+              stop();
+              watch();
+            }}
           >
-            <source
-              src="http://192.168.178.95:80/video.mp4"
-              type="video/mp4"
-              id="source"
-            />
+            {load && (
+              <source src={videoData.videoUrl} type="video/mp4" id="source" />
+            )}
           </video>
         </div>
         <div className="player-account">
@@ -239,8 +291,8 @@ function Player() {
             <div className="heart" id="heart">
               <Heart16Regular className="nav-icon" onClick={like} />
             </div>
-            <div className="bookmark" id="save-icon">
-              <Bookmark20Regular className="nav-icon" onClick={save} />
+            <div className="bookmark" id="save-icon" onClick={save}>
+              <Bookmark20Filled className="nav-icon" />
             </div>
             <div className="add">
               <AddCircle12Regular

@@ -16,6 +16,8 @@ function Dashboard() {
   const [valid, setValid] = useState(false);
   const [savedVideos, setSavedVideos] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [allData, setAllData] = useState([]);
+  const [mobileLoaded, setMobileLoaded] = useState(false);
 
   useEffect(() => {
     var requestOptions = {
@@ -35,7 +37,31 @@ function Dashboard() {
         }
       })
       .catch((error) => console.log("error", error));
+    if (window.innerWidth > 700) {
+      fetchMobileData();
+    }
   }, []);
+
+  async function fetchMobileData() {
+    const data = [
+      fetch(
+        "http://192.168.178.95:9090/user/liked?session=" + getSession()
+      ).then((res) => res.json()),
+      fetch(
+        "http://192.168.178.95:9090/user/history?session=" + getSession()
+      ).then((res) => res.json()),
+      fetch(
+        "http://192.168.178.95:9090/user/saved?session=" + getSession()
+      ).then((res) => res.json()),
+      fetch(
+        "http://192.168.178.95:9090/user/upload?session=" + getSession()
+      ).then((res) => res.json()),
+    ];
+    var response = await Promise.all(data);
+    setAllData(response);
+    setMobileLoaded(true);
+    console.log(response);
+  }
   useEffect(() => {
     var requestOptions = {
       method: "GET",
@@ -93,7 +119,7 @@ function Dashboard() {
             </div>
             <div className="options-list">
               <div
-                className="option"
+                className="option selected"
                 id="history"
                 onClick={() => {
                   setSelection("history");
@@ -106,7 +132,7 @@ function Dashboard() {
                 </li>
               </div>
               <div
-                className="option selected"
+                className="option"
                 id="liked"
                 onClick={() => {
                   setSelection("liked");
@@ -157,19 +183,20 @@ function Dashboard() {
           </div>
         </div>
         <div className="content-section video-container" id="dahboard-content">
-          {selection == "history" &&
-            Array.from({ length: 40 }, (_, i) => (
-              <Video
-                preview={
-                  "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-                }
-                profile={
-                  "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-                }
-                title={"Verlauf"}
-                description={"oijdsfiniopuiasd sdasd"}
-              />
-            ))}
+          {selection === "history" &&
+            loaded &&
+            savedVideos
+              .toReversed()
+              .map((video) => (
+                <Video
+                  preview={video.thumbnailUrl}
+                  profile={video.profilePicture}
+                  title={video.title}
+                  description={video.description}
+                  videoId={video.id}
+                  profileId={video.authorId}
+                />
+              ))}
           {selection === "saved" &&
             savedVideos.map((video) => (
               <Video
@@ -178,127 +205,46 @@ function Dashboard() {
                 title={video.title}
                 description={video.description}
                 videoId={video.id}
-                profileId={video.authorId} 
+                profileId={video.authorId}
               />
             ))}
-          {selection == "liked" &&
-            Array.from({ length: 40 }, (_, i) => (
+
+          {selection === "liked" &&
+            savedVideos.map((video) => (
               <Video
-                preview={
-                  "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-                }
-                profile={
-                  "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-                }
-                title={"liked"}
-                description={"oijdsfiniopuiasd sdasd"}
+                preview={video.thumbnailUrl}
+                profile={video.profilePicture}
+                title={video.title}
+                description={video.description}
+                videoId={video.id}
+                profileId={video.authorId}
               />
             ))}
           {selection == "upload" &&
-            Array.from({ length: 40 }, (_, i) => (
+            savedVideos.map((video) => (
               <Video
-                preview={
-                  "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-                }
-                profile={
-                  "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-                }
-                title={"uploaded"}
-                description={"oijdsfiniopuiasd sdasd"}
+                preview={video.thumbnailUrl}
+                profile={video.profilePicture}
+                title={video.title}
+                description={video.description}
+                videoId={video.id}
+                profileId={video.authorId}
               />
             ))}
         </div>
 
         <label className="video-title-big">Gefällt mir</label>
         <div className="liked history">
-          <Video
-            preview={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            profile={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            title={"Hallo"}
-            mode={"small"}
-            description={"oijdsfiniopuiasd sdasd"}
-          />{" "}
-          <Video
-            preview={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            profile={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            title={"Hallo"}
-            mode={"small"}
-            description={"oijdsfiniopuiasd sdasd"}
-          />{" "}
-          <Video
-            preview={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            profile={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            title={"Hallo"}
-            mode={"small"}
-            description={"oijdsfiniopuiasd sdasd"}
-          />{" "}
-          <Video
-            preview={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            profile={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            title={"Hallo"}
-            mode={"small"}
-            description={"oijdsfiniopuiasd sdasd"}
-          />{" "}
-          <Video
-            preview={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            profile={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            title={"Hallo"}
-            mode={"small"}
-            description={"oijdsfiniopuiasd sdasd"}
-          />{" "}
-          <Video
-            preview={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            profile={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            title={"Hallo"}
-            mode={"small"}
-            description={"oijdsfiniopuiasd sdasd"}
-          />{" "}
-          <Video
-            preview={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            profile={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            title={"Hallo"}
-            mode={"small"}
-            description={"oijdsfiniopuiasd sdasd"}
-          />{" "}
-          <Video
-            preview={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            profile={
-              "http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
-            }
-            title={"Hallo"}
-            mode={"small"}
-            description={"oijdsfiniopuiasd sdasd"}
-          />
+          {mobileLoaded &&
+            allData[0].map((video) => {
+              <Video
+                preview={video.thumbnailUrl}
+                profile={video.profilePicture}
+                title={video.title}
+                mode={"small"}
+                description={video.description}
+              />;
+            })}
         </div>
         <label htmlFor="" className="video-title-big">
           Hochgeladen

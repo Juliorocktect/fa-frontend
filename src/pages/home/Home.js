@@ -29,8 +29,7 @@ function Home() {
       .catch((error) => console.log("error", error));
   }, []);
 
-  //TODO: only load shown content + extra
-  //TODO: load new Content if old content isnt shown
+  //TODO: add paging system
   return (
     <>
       <div className="home">
