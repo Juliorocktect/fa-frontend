@@ -211,6 +211,16 @@ function Player() {
       .then((result) => null)
       .catch((error) => console.log("error", error));
   }
+  function updateProgressOnClick(clientX) {
+    var progressBar = document.getElementById("progress");
+    var rect = progressBar.getBoundingClientRect();
+    updateProgressBar(((clientX - rect.left) / rect.width) * 100);
+    let video = document.getElementById("video-player");
+    video.currentTime = (video.duration * (clientX - rect.left)) / rect.width;
+    video.play();
+    playStatus = true;
+    //TODO: change icon
+  }
   if (videoData == null || searchParams.get("id") === "") {
     return <NotFound />;
   }
@@ -249,7 +259,13 @@ function Player() {
               />
             </div>
           </div>
-          <div className="progress">
+          <div
+            id="progress"
+            className="progress"
+            onClick={(e) => {
+              updateProgressOnClick(e.clientX);
+            }}
+          >
             <div className="progress-bar" id="progress-bar"></div>
           </div>
           <video

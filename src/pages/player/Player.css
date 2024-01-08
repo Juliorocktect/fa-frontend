@@ -79,6 +79,11 @@ video {
   height: 25px;
   cursor: pointer;
 }
+@container player-account-front (max-width: 200px) {
+  .player-title {
+    font-size: 1rem;
+  }
+}
 .play-icon-disabled {
   display: none;
 }
@@ -92,6 +97,8 @@ video {
   justify-content: space-between;
   width: 40%;
   align-items: center;
+  container-name: player-account-front;
+  container-type: inline-size;
 }
 .player-title {
   color: aliceblue;
