@@ -18,14 +18,13 @@ import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { getSession } from "../../Cookie";
 import { useSearchParams } from "react-router-dom";
 import NotFound from "../../components/notFound/NotFound";
-import BookMarkFilled from "./bookmarkFilled.svg";
 
 function Player() {
   const [searchParams] = useSearchParams();
   const [videoData, setVideoData] = useState(null);
+  const [saved, setSaved] = useState(false);
   let hasLiked = false;
   let playStatus = false;
-  let saved = false;
   var seconds = 0;
   var tens = 0;
   var Interval;
@@ -101,7 +100,7 @@ function Player() {
     setTimeout(() => {
       document.getElementById("subscribe-button").remove();
       document.getElementById(
-        "player-account-back"
+        "subscribe-button-container"
       ).innerHTML += `<svg class="subscribed ___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0" id="subed" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 2a6 6 0 1 1 0 12A6 6 0 0 1 8 2Zm2.12 4.16L7.25 9.04l-1.4-1.4a.5.5 0 1 0-.7.71L6.9 10.1c.2.2.5.2.7 0l3.23-3.23a.5.5 0 0 0-.71-.7Z" fill="currentColor"></path></svg>`;
     }, 290);
   }
@@ -182,10 +181,9 @@ function Player() {
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
-      document.getElementById("save-icon").innerHTML = "";
-      saved = true;
+      setSaved(true);
     } else {
-      saved = false;
+      setSaved(false);
     }
   }
   //TODO: add animations to like and save
@@ -308,9 +306,10 @@ function Player() {
               <Heart16Regular className="nav-icon" onClick={like} />
             </div>
             <div className="bookmark" id="save-icon" onClick={save}>
-              <Bookmark20Filled className="nav-icon" />
+              {saved && <Bookmark20Regular className="nav-icon" />}
+              {!saved && <Bookmark20Filled className="nav-icon" />}
             </div>
-            <div className="add">
+            <div className="add" id="subscribe-button-container">
               <AddCircle12Regular
                 className="nav-icon"
                 id="subscribe-button"
@@ -320,6 +319,9 @@ function Player() {
               />
             </div>
           </div>
+        </div>
+        <div className="video-recommended video-container-container">
+          <div id="video-container"></div>
         </div>
       </div>
     </>

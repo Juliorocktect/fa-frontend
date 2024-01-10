@@ -18,6 +18,7 @@ function Dashboard() {
   const [loaded, setLoaded] = useState(false);
   const [allData, setAllData] = useState([]);
   const [mobileLoaded, setMobileLoaded] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     var requestOptions = {
@@ -37,6 +38,7 @@ function Dashboard() {
         }
       })
       .catch((error) => console.log("error", error));
+    //TODO: fetch user by session
     if (window.innerWidth > 700) {
       fetchMobileData();
     }
@@ -115,7 +117,7 @@ function Dashboard() {
                 alt=""
                 className="dashboard-profile-img"
               />
-              <h2 className="video-title">Jonathan</h2>
+              <h2 className="video-title">Julios</h2>
             </div>
             <div className="options-list">
               <div
