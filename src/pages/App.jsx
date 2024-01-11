@@ -8,7 +8,7 @@ import Login from "./login/Login";
 import Signup from "./signup/Signup";
 import Upload from "./upload/Upload";
 import Dashboard from "./dashboard/Dashboard";
-import TrendsNew from "../components/trendsNew/TrendsNew";
+import NotFound from "../components/notFound/NotFound";
 function App() {
   return (
     <>
@@ -24,6 +24,7 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/upload" element={<Upload />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path='*' element={<NotFound />}/>
       </Routes>
     </>
   );
