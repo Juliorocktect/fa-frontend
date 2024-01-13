@@ -46,7 +46,7 @@ function Search() {
         {
           setSearch(e.target.value);
           setSearchParams({q: e.target.value});
-        }} />
+        }}/>
       </div>
       <SearchDesk query={searchParams.get("q") } setSearch={setSearch}></SearchDesk>
       <div className="suggestions"></div>

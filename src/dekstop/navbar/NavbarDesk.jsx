@@ -7,6 +7,7 @@ import {
   Alert12Regular,
 } from "@fluentui/react-icons";
 import { useNavigate } from "react-router-dom";
+import Notifications from "../../components/notifications/Notifications";
   
 function NavbarDesk({searchQuery,setSearch}) {
   const navigate = useNavigate();
@@ -51,10 +52,12 @@ function NavbarDesk({searchQuery,setSearch}) {
             }}
           />
         </div>
+        
         <div className="icons-container-nav">
           <div className="bell-container">
             <Alert12Regular className="nav-icon" />
           </div>
+        
           <div className="account-container">
             <Person12Regular
               className="nav-icon"
@@ -65,6 +68,7 @@ function NavbarDesk({searchQuery,setSearch}) {
           </div>
         </div>
       </div>
+      <Notifications/>
     </>
   );
 }
