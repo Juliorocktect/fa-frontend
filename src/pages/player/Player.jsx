@@ -5,7 +5,7 @@ import {
   Heart16Regular,
   Heart16Filled,
 } from "@fluentui/react-icons";
-import { ArrowLeft12Filled, AddCircle12Regular } from "@fluentui/react-icons";
+import { AddCircle12Regular } from "@fluentui/react-icons";
 import "./Player.css";
 import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import { getSession } from "../../Cookie";

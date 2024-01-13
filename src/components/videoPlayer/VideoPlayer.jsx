@@ -14,29 +14,23 @@ import {
     Heart16Filled,
   } from "@fluentui/react-icons";
   import { getSession } from "../../Cookie";
-
+  let timer;
+  let seconds = 0;
+  var watched = false;
 function VideoPlayer({videoUrl,videoId}) {
     const [playStatus,setPlayStatus] = useState(false);
-    var seconds = 0;
-    var tens = 0;
-    var Interval;
-
-    function startTimerFn() {
-        clearInterval(Interval);
-        Interval = setInterval(startTimer, 10);
+    function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(count, 1000);
       }
     
       function stop() {
-        clearInterval(Interval);
+        clearInterval(timer);
       }
     
-      function startTimer() {
-        tens++;
-        if (tens > 99) {
+      function count() {
           seconds++;
-          tens = 0;
           console.log(seconds);
-        }
         if (seconds > 30 && !watched) {
           watch();
         }
@@ -69,7 +63,8 @@ function VideoPlayer({videoUrl,videoId}) {
           setPlayStatus(false);
         } else {
           video.play();
-          startTimerFn();
+          stop();
+          startTimer();
           setPlayStatus(true);
         }
       }

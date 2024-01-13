@@ -12,7 +12,7 @@ import {
 } from "@fluentui/react-icons";
 import { getSession, setSession } from "../../Cookie";
 function Dashboard() {
-  const [selection, setSelection] = useState("history");
+  const [selection, setSelection] = useState(null);
   const [valid, setValid] = useState(false);
   const [savedVideos, setSavedVideos] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -21,30 +21,22 @@ function Dashboard() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-    fetch(
-      "http://192.168.178.95:9090/user/isValid?session=" + getSession(),
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        if (result === "true") {
-          setValid(true);
-        } else {
-          setValid(false);
-        }
-      })
-      .catch((error) => console.log("error", error));
-    //TODO: fetch user by session
-    if (window.innerWidth > 700) {
-      fetchMobileData();
-    }
+    fetchData();
+    setSelection("history");
   }, []);
 
-  async function fetchMobileData() {
+  async function fetchData() {
+    try {
+      var responseValid = await fetch("http://192.168.178.95:9090/user/isValid?session=" + getSession()).then(response => response.text());
+      if( responseValid === "true"){
+        setValid(true);
+      }
+      else{
+        setValid(false);
+      }
+    } catch (error){
+      console.log("error",error);
+    }
     const data = [
       fetch(
         "http://192.168.178.95:9090/user/liked?session=" + getSession()
@@ -58,33 +50,30 @@ function Dashboard() {
       fetch(
         "http://192.168.178.95:9090/user/upload?session=" + getSession()
       ).then((res) => res.json()),
+      
     ];
     var response = await Promise.all(data);
+    var userRes = await fetch("http://192.168.178.95:9090/user/getBySession?session=" + getSession()).then(res => res.json());
     setAllData(response);
     setMobileLoaded(true);
-    console.log(response);
+    setSavedVideos(response[0]);
+    setUser(userRes);
+    setLoaded(true);
   }
   useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch(
-      "http://192.168.178.95:9090/user/" +
-        selection +
-        "?session=" +
-        getSession(),
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        setSavedVideos(result);
-        console.log(result);
-        setLoaded(true);
-      })
-      .catch((error) => console.log("error", error));
-    console.log(selection);
+    if (selection === "liked"){
+      setSavedVideos(allData[1]);
+    }
+    if (selection === "saved"){
+      setSavedVideos(allData[3]);
+    }
+    if (selection === "upload"){
+      setSavedVideos(allData[2]);
+    }
+    if (selection === "history"){
+      setSavedVideos(allData[0]);
+    }
+  
   }, [selection]);
 
   function resetSelected() {
@@ -113,11 +102,11 @@ function Dashboard() {
             <img alt="" className="logo logo-dash" src={w}></img>
             <div className="mid-section">
               <img
-                src="http://192.168.178.95/videos/a442def0-e067-478b-a120-1a53a90c97d0/a442def0-e067-478b-a120-1a53a90c97d0.jpeg"
+                src={loaded && user.pictureUrl}
                 alt=""
                 className="dashboard-profile-img"
               />
-              <h2 className="video-title">Julios</h2>
+              <h2 className="video-title">{loaded && user.userName}</h2>
             </div>
             <div className="options-list">
               <div

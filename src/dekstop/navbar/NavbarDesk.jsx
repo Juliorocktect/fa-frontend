@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./w.svg";
 import "./NavbarDesk.css";
 import {
@@ -7,10 +7,15 @@ import {
   Alert12Regular,
 } from "@fluentui/react-icons";
 import { useNavigate } from "react-router-dom";
-
-function NavbarDesk() {
+  
+function NavbarDesk({searchQuery,setSearch}) {
   const navigate = useNavigate();
   let search = "";
+  useEffect(()=>{
+    if (searchQuery != null){
+      document.getElementById("search").setAttribute("value",searchQuery);
+    }
+  },[])
   return (
     <>
       <div className="desk-nav">
@@ -33,7 +38,16 @@ function NavbarDesk() {
             className="search-bar-nav-desk"
             onKeyUp={(e) => {
               search = e.target.value;
-              console.log(search);
+            }}
+            id="search"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter'){
+                e.preventDefault();
+                if (window.location !== "/search"){
+                  navigate("/search?q=" + search);
+                }
+                setSearch(search);
+              }
             }}
           />
         </div>

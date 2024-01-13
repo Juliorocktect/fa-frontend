@@ -13,3 +13,8 @@
   justify-content: space-around;
   margin-top: 5%;
 }
+@media (min-width: 700px) {
+  .search-head {
+    display: none;
+  }
+}
