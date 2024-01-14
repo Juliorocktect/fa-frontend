@@ -10,7 +10,7 @@ function Notifications() {
 
   return (
     <>
-        <div className="rest-container" onClick={() => {
+        <div className="rest-container disabled" onClick={() => {
           disableNotifications();
         }}></div>
           <div className="notifications" id='not'>

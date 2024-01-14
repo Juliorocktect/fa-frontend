@@ -96,7 +96,6 @@ function Player() {
     }
   }
   //TODO: add animations to like and save
-  //TODO: all icons in div
   //TODO: add css transition to controls and progress bar
   //TODO: controls in fullscreen
   //TODO: add settings + volume slider

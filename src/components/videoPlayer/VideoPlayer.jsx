@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import {
     ArrowMaximize16Filled,
@@ -19,6 +19,7 @@ import {
   var watched = false;
 function VideoPlayer({videoUrl,videoId}) {
     const [playStatus,setPlayStatus] = useState(false);
+    const [volumeVisible,setVisible] = useState(false);
     function startTimer() {
         clearInterval(timer);
         timer = setInterval(count, 1000);
@@ -77,6 +78,21 @@ function VideoPlayer({videoUrl,videoId}) {
         video.play();
         setPlayStatus(true);
       }
+      useEffect(() => {
+        setVisible(!volumeVisible);
+      },[])
+      useEffect(()=>{
+        if(volumeVisible){
+          document.getElementById("input").classList.add("not-visible");
+        }
+        else{
+          document.getElementById("input").classList.remove("not-visible");
+          
+        }
+      },[volumeVisible])
+      function setVolume(volume){
+        document.getElementById("video-player").vlume = volume;
+      }
       function watch() {
         var requestOptions = {
           method: "POST",
@@ -97,16 +113,24 @@ function VideoPlayer({videoUrl,videoId}) {
   return (
     <>
         <div className="video-player ">
-          <div className="player-config">
-            <Settings16Regular className="nav-icon player-icon" />
-            <Speaker216Regular className="nav-icon player-icon" />
-            <div className="fullscreen-container player-icon">
-              <ArrowMaximize16Filled
-                className="nav-icon  player-icon"
-                onClick={toggleFullscreen}
-              />
+            <div className="player-config">
+            <div className="space-container">
+              <Settings16Regular className="nav-icon player-icon" />
+              <div className="volume-container">
+              <div className="input"><input className="styled-slider" id="input" type="range" name=""  onChange={(e) => {setVolume(e.target.value/100)}}/></div>
+                <div className="" onClick={() => {setVisible(!volumeVisible)}}>
+                  <Speaker216Regular className="nav-icon player-icon" />
+                </div>
+              </div>
+              <div className="fullscreen-container player-icon">
+                <ArrowMaximize16Filled
+                  className="nav-icon  player-icon"
+                  onClick={toggleFullscreen}
+                />
+              </div>
             </div>
           </div>
+        
           <div className="controls-container" id="controls-container">
             <div className="skip-back-container">
               <SkipBack1020Regular className="nav-icon" onClick={skipBack} />

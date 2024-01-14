@@ -68,7 +68,6 @@ function NavbarDesk({searchQuery,setSearch}) {
           </div>
         </div>
       </div>
-      <Notifications/>
     </>
   );
 }
