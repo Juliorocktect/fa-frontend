@@ -60,7 +60,7 @@ function TrendsNew() {
   }
 
   function next() {
-    if (counter < images.length - 2) {
+    if (counter < images.length - 2 || counter < 10) {
       counter++;
       console.log(counter);
       setCurrent(counter);

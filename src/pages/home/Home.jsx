@@ -7,6 +7,7 @@ import NavbarDesk from "../../dekstop/navbar/NavbarDesk";
 import "../../components/video/Video.css";
 import { useState } from "react";
 import TrendsNew from "../../components/trendsNew/TrendsNew";
+import image from "./image.jpeg";
 
 function Home() {
   const [videos, setVideos] = useState([]);
@@ -49,6 +50,17 @@ function Home() {
                   profileId={video.authorId}
                 />
               ))}
+                {[...Array(20)].map((elementInArray, index) => ( 
+                  <Video
+                    preview={image}
+                    profile={image}
+                    title={"Test Title"}
+                    description={"Test Desription"}
+                    videoId={"8902342"}
+                    profileId={"890981023"}
+                  />
+                ))
+              }
           </div>
         </div>
         <div className="navbar-home">
