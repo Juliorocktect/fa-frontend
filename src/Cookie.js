@@ -7,7 +7,8 @@ function setSession(value) {
 
 function getSession() {
   let decodedCookie = decodeURIComponent(document.cookie);
-  return decodedCookie.split(";")[0].substring(8, c.length);
+  var session = decodedCookie.split(";")[0];
+  return session.substring(8, session.length);
 }
 
 export { getSession, setSession };

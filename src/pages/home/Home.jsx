@@ -13,13 +13,8 @@ function Home() {
   const [videos, setVideos] = useState([]);
   const [load, setLoad] = useState(false);
   useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
     fetch(
-      "http://192.168.178.95:9090/video/getVideosByLimit?limit=30",
-      requestOptions
+      "http://192.168.178.95:9090/video/getVideosByLimit?limit=30"
     )
       .then((response) => response.json())
       .then((result) => {
